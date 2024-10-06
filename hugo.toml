@@ -1,0 +1,4 @@
+baseURL = 'https://rudolfj.github.io'
+languageCode = 'en-us'
+title = 'Rudolf J'
+theme = 'typo'
