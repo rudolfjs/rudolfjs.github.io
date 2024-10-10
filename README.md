@@ -1,2 +1,3 @@
 # rudolfj.github.io
-Rudolf J profile hosted using GitHub Pages
+
+Rudolf J profile hosted using GitHub Pages.
