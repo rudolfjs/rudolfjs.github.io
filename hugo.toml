@@ -1,4 +1,31 @@
 baseURL = 'https://rudolfj.github.io'
 languageCode = 'en-us'
-title = 'Rudolf J'
+title = 'Rudolf J Schnetler'
 theme = 'typo'
+
+[params]
+theme = 'auto'
+colorPalette = 'eink'
+#showFooter = true
+#footerContent = "Your **custom** md `footer`"
+
+homeIntroTitle = "About"
+homeIntroContent = """I am a PhD candidate in Information Technology at the University of Queensland. 
+My research focuses on algorithmic bias in machine learning within healthcare.
+I am also a Certified Health Informatician Australasia (CHIA) and an Associate Fellow of the Australasian Institute of Digital Health (AFAIDH)."""
+
+[[params.social]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/rudolfj/"
+
+[[params.social]]
+name = "orcid"
+url = "https://orcid.org/0000-0001-5129-5601"
+
+[[params.social]]
+name = "github"
+url = "https://github.com/rudolfjs/"
+
+[[params.social]]
+name = "kaggle"
+url = "https://www.kaggle.com/samplevariance"
