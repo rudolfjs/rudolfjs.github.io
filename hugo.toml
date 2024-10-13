@@ -9,10 +9,10 @@ colorPalette = 'eink'
 #showFooter = true
 #footerContent = "Your **custom** md `footer`"
 
-homeIntroTitle = "About"
-homeIntroContent = """I am a PhD candidate in Information Technology at the University of Queensland. 
-My research focuses on algorithmic bias in machine learning within healthcare.
-I am also a Certified Health Informatician Australasia (CHIA) and an Associate Fellow of the Australasian Institute of Digital Health (AFAIDH)."""
+homeIntroTitle = "Contact Me"
+homeIntroContent = """
+
+"""
 
 [[params.social]]
 name = "linkedin"
