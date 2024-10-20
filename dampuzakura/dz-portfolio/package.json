@@ -1,5 +1,5 @@
 {
-  "name": "zapping-zero",
+  "name": "dampuzakura-dz-portfolio",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,13 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
     "astro": "^4.16.6",
+    "@astrojs/check": "^0.9.4",
     "typescript": "^5.6.3"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14"
   }
 }
