@@ -1,0 +1,95 @@
+{{ define "main" }}
+<div class="max-w-4xl mx-auto">
+    <!-- Hero Section -->
+    <section class="mb-20">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">{{ .Title }}</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">{{ .Description }}</p>
+        </div>
+        <div class="prose dark:prose-invert lg:prose-lg mx-auto">
+            {{ .Content }}
+        </div>
+    </section>
+
+    <!-- Recent Blog Posts -->
+    <section class="mb-20">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Recent Posts</h2>
+            <a href="/blog" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
+                View all posts
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+        <div class="grid gap-8">
+            {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
+            <article class="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3">
+                        <a href="{{ .Permalink }}" class="hover:text-blue-600 dark:hover:text-blue-400">{{ .Title }}</a>
+                    </h3>
+                    <div class="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+                        <time class="flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            {{ .Date.Format "January 2, 2006" }}
+                        </time>
+                        {{ with .Params.categories }}
+                        <span class="mx-2">·</span>
+                        {{ delimit . ", " }}
+                        {{ end }}
+                    </div>
+                    {{ with .Description }}
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">{{ . }}</p>
+                    {{ end }}
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    </section>
+
+    <div class="grid md:grid-cols-2 gap-12">
+        <!-- Featured Projects -->
+        <section>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Featured Projects</h2>
+                <a href="/projects" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm">View all →</a>
+            </div>
+            <div class="space-y-6">
+                {{ range first 2 (where .Site.RegularPages "Section" "projects") }}
+                <article class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+                    <h3 class="text-lg font-semibold mb-2">
+                        <a href="{{ .Permalink }}" class="hover:text-blue-600 dark:hover:text-blue-400">{{ .Title }}</a>
+                    </h3>
+                    {{ with .Description }}
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">{{ . }}</p>
+                    {{ end }}
+                </article>
+                {{ end }}
+            </div>
+        </section>
+
+        <!-- Recent Publications -->
+        <section>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Latest Publications</h2>
+                <a href="/publications" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm">View all →</a>
+            </div>
+            <div class="space-y-6">
+                {{ range first 3 (where .Site.RegularPages "Section" "publications") }}
+                <article class="border-l-2 border-blue-600 dark:border-blue-400 pl-4">
+                    <h3 class="text-lg font-semibold mb-2">
+                        <a href="{{ .Permalink }}" class="hover:text-blue-600 dark:hover:text-blue-400">{{ .Title }}</a>
+                    </h3>
+                    {{ with .Description }}
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">{{ . }}</p>
+                    {{ end }}
+                </article>
+                {{ end }}
+            </div>
+        </section>
+    </div>
+</div>
+{{ end }}

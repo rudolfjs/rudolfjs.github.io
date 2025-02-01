@@ -1,0 +1,38 @@
+{
+  "name": "minimal-research",
+  "version": "1.0.0",
+  "description": "## Features",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.0.2"
+  },
+  "dependencies": {
+    "browserslist": "^4.24.4",
+    "caniuse-lite": "^1.0.30001696",
+    "cssesc": "^3.0.0",
+    "electron-to-chromium": "^1.5.90",
+    "escalade": "^3.2.0",
+    "fraction.js": "^4.3.7",
+    "lodash.castarray": "^4.4.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.merge": "^4.6.2",
+    "nanoid": "^3.3.8",
+    "node-releases": "^2.0.19",
+    "normalize-range": "^0.1.2",
+    "picocolors": "^1.1.1",
+    "postcss-selector-parser": "^6.0.10",
+    "postcss-value-parser": "^4.2.0",
+    "source-map-js": "^1.2.1",
+    "update-browserslist-db": "^1.1.2",
+    "util-deprecate": "^1.0.2"
+  }
+}

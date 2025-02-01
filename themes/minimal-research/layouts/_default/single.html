@@ -1,0 +1,75 @@
+{{ define "main" }}
+<article class="prose dark:prose-invert lg:prose-lg mx-auto">
+    <header class="not-prose mb-12">
+        <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-4">{{ . }}</p>
+        {{ end }}
+        <div class="flex flex-wrap items-center gap-4">
+            {{ if .Date }}
+            <time class="text-sm text-gray-600 dark:text-gray-400 flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ .Date.Format "January 2, 2006" }}
+            </time>
+            {{ end }}
+            {{ with .Params.categories }}
+            <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                {{ delimit . ", " }}
+            </div>
+            {{ end }}
+        </div>
+        {{ with .Params.tags }}
+        <div class="mt-4 flex flex-wrap gap-2">
+            {{ range . }}
+            <span class="tag">#{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+    </header>
+
+    <div class="content mt-8 space-y-6">
+        {{ .Content }}
+    </div>
+
+    {{ if .Params.math }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    {{ end }}
+
+    {{ if eq .Section "blog" }}
+    <footer class="not-prose mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <nav class="flex justify-between items-center">
+            {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="group flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
+                <svg class="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>{{ .Title }}</span>
+            </a>
+            {{ end }}
+            {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="group flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
+                <span>{{ .Title }}</span>
+                <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+            {{ end }}
+        </nav>
+    </footer>
+    {{ end }}
+</article>
+{{ end }}

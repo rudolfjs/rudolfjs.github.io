@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Research Profile &amp; Blog</title>
+    <meta name="description" content="Background, research interests, and expertise">
+    
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    maxWidth: {
+                        'prose': '65ch',
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: '100ch',
+                                color: '#1a1a1a',
+                                a: {
+                                    color: '#3182ce',
+                                    '&:hover': {
+                                        color: '#2c5282',
+                                    },
+                                },
+                                h1: {
+                                    color: '#1a1a1a',
+                                },
+                                h2: {
+                                    color: '#1a1a1a',
+                                },
+                                h3: {
+                                    color: '#1a1a1a',
+                                },
+                                code: {
+                                    color: '#1a1a1a',
+                                },
+                                pre: {
+                                    backgroundColor: '#f7fafc',
+                                },
+                            },
+                        },
+                        dark: {
+                            css: {
+                                color: '#e2e8f0',
+                                a: {
+                                    color: '#63b3ed',
+                                    '&:hover': {
+                                        color: '#90cdf4',
+                                    },
+                                },
+                                h1: {
+                                    color: '#e2e8f0',
+                                },
+                                h2: {
+                                    color: '#e2e8f0',
+                                },
+                                h3: {
+                                    color: '#e2e8f0',
+                                },
+                                code: {
+                                    color: '#e2e8f0',
+                                },
+                                pre: {
+                                    backgroundColor: '#2d3748',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            plugins: [
+                tailwind.plugin.withOptions(() => {
+                    return function({ addBase, theme }) {
+                        addBase({
+                            'html.dark': {
+                                'color-scheme': 'dark',
+                            },
+                        })
+                    }
+                }),
+            ],
+        }
+    </script>
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <style>
+         
+        pre[class*="language-"] {
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .dark pre[class*="language-"] {
+            background: #1a1a1a;
+        }
+        code[class*="language-"] {
+            text-shadow: none;
+        }
+         
+        :not(pre) > code {
+            background: #f3f4f6;
+            color: #ef4444;
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        .dark :not(pre) > code {
+            background: #374151;
+            color: #f87171;
+        }
+         
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: #e5e7eb;
+            color: #4b5563;
+            margin: 0.25rem;
+            transition: all 0.2s;
+        }
+        .dark .tag {
+            background: #374151;
+            color: #9ca3af;
+        }
+        .tag:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 line-numbers" x-data="{ darkMode: false }" x-init="
+    if (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        localStorage.setItem('darkMode', JSON.stringify(true));
+    }
+    darkMode = JSON.parse(localStorage.getItem('darkMode'));
+    $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))">
+    
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    
+    <header class="border-b border-gray-200 dark:border-gray-700" x-bind:class="{ 'dark': darkMode }">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-xl font-bold hover:text-blue-600 dark:hover:text-blue-400">Research Profile &amp; Blog</a>
+                <nav class="flex items-center space-x-6">
+                    
+                    <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium">Home</a>
+                    
+                    <a href="/about/" class="hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium">About</a>
+                    
+                    <a href="/publications/" class="hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium">Publications</a>
+                    
+                    <a href="/projects/" class="hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium">Projects</a>
+                    
+                    <a href="/blog/" class="hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium">Blog</a>
+                    
+                    <button
+                        @click="darkMode = !darkMode"
+                        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                        x-bind:aria-label="darkMode ? 'Disable dark mode' : 'Enable dark mode'"
+                    >
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg x-show="darkMode" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        
+<div class="max-w-4xl mx-auto">
+    <header class="mb-12">
+        <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">About</h1>
+        
+        <p class="text-xl text-gray-600 dark:text-gray-400">Background, research interests, and expertise</p>
+        
+    </header>
+
+    
+    <div class="prose dark:prose-invert lg:prose-lg mb-12">
+        <h2 id="background">Background</h2>
+<p>I am a researcher in Information Technology with a PhD focusing on digital health and machine learning applications in healthcare. My research aims to bridge the gap between advanced machine learning techniques and practical healthcare solutions.</p>
+<h2 id="research-interests">Research Interests</h2>
+<ul>
+<li><strong>Digital Health Technologies</strong>: Development and implementation of digital solutions for healthcare delivery and management</li>
+<li><strong>Machine Learning in Healthcare</strong>: Application of ML algorithms for medical data analysis and prediction</li>
+<li><strong>Healthcare Information Systems</strong>: Integration and optimization of IT systems in healthcare settings</li>
+</ul>
+<h2 id="education">Education</h2>
+<ul>
+<li>PhD in Information Technology</li>
+<li>[Previous degrees to be added]</li>
+</ul>
+<h2 id="current-work">Current Work</h2>
+<p>I am currently focused on developing machine learning solutions for healthcare applications, with a particular emphasis on:</p>
+<ul>
+<li>Predictive analytics in healthcare</li>
+<li>Medical data processing and analysis</li>
+<li>Healthcare system optimization</li>
+</ul>
+<h2 id="contact">Contact</h2>
+<p>Feel free to reach out for research collaborations or discussions about digital health and machine learning in healthcare.</p>
+<p>[Contact information and social links to be added]</p>
+
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2">
+        
+    </div>
+    
+</div>
+
+    </main>
+
+    
+    <footer class="border-t border-gray-200 dark:border-gray-700 mt-12">
+        <div class="container mx-auto px-4 py-6 max-w-4xl">
+            <div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400">
+                <div>© 2025 Rudolf J</div>
+                <div class="flex space-x-4">
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+</body>
+</html>

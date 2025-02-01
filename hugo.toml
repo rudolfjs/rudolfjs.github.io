@@ -1,0 +1,58 @@
+baseURL = 'https://rudolfj.github.io/'
+languageCode = 'en-us'
+title = 'Research Profile & Blog'
+theme = 'minimal-research'
+
+# Enable syntax highlighting
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+
+# Enable Git Info for lastmod
+enableGitInfo = true
+
+# Taxonomies
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+  series = 'series'
+
+# Menu
+[menu]
+  [[menu.main]]
+    name = 'Home'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    name = 'About'
+    url = '/about/'
+    weight = 2
+  [[menu.main]]
+    name = 'Publications'
+    url = '/publications/'
+    weight = 3
+  [[menu.main]]
+    name = 'Projects'
+    url = '/projects/'
+    weight = 4
+  [[menu.main]]
+    name = 'Blog'
+    url = '/blog/'
+    weight = 5
+
+# Site Parameters
+[params]
+  description = "Research profile and blog focusing on Digital Health and Machine Learning in Healthcare"
+  author = "Rudolf J"
+  # Social Media Links (we'll add these later)
+  github = ""
+  linkedin = ""
+  googleScholar = ""
+  
+  # Enable dark mode toggle
+  darkMode = true
+  
+  # Enable math rendering
+  math = true
+  
+  # Enable code copy button
+  codeBlock = true
