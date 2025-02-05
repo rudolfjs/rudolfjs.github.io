@@ -2,59 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/about/</loc>
-  </url><url>
-    <loc>http://localhost:1313/publications/</loc>
-  </url><url>
-    <loc>http://localhost:1313/projects/</loc>
-  </url><url>
-    <loc>http://localhost:1313/blog/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/general/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/healthcare/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/introduction/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/machine-learning/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/posts/welcome-post/</loc>
-    <lastmod>2025-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/blue/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/green/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/post-3/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/red/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/post-2/</loc>
-    <lastmod>2023-02-15T10:00:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/post-1/</loc>
-    <lastmod>2023-01-15T09:00:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2023-01-01T08:30:00-07:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/about/</loc>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/</loc>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2024-10-13T10:41:59+10:00</lastmod>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projects/</loc>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/publications/</loc>
+    <lastmod>2025-02-01T12:28:10+10:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/series/</loc>
   </url>
