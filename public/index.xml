@@ -35,5 +35,33 @@
       <guid>http://localhost:1313/posts/post-1/</guid>
       <description>&lt;p&gt;Tempor proident minim aliquip reprehenderit dolor et ad anim Lorem duis sint eiusmod. Labore ut ea duis dolor. Incididunt consectetur proident qui occaecat incididunt do nisi Lorem. Tempor do laborum elit laboris excepteur eiusmod do. Eiusmod nisi excepteur ut amet pariatur adipisicing Lorem.&lt;/p&gt;&#xA;&lt;p&gt;Occaecat nulla excepteur dolore excepteur duis eiusmod ullamco officia anim in voluptate ea occaecat officia. Cillum sint esse velit ea officia minim fugiat. Elit ea esse id aliquip pariatur cupidatat id duis minim incididunt ea ea. Anim ut duis sunt nisi. Culpa cillum sit voluptate voluptate eiusmod dolor. Enim nisi Lorem ipsum irure est excepteur voluptate eu in enim nisi. Nostrud ipsum Lorem anim sint labore consequat do.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>Deep Learning for Medical Image Analysis: Current Progress and Future Challenges</title>
+      <link>http://localhost:1313/publications/example-publication-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/example-publication-2/</guid>
+      <description>&lt;p&gt;Abstract: A comprehensive analysis of deep learning applications in medical image analysis, highlighting recent advances and identifying key challenges.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Explainable AI in Clinical Decision Support Systems</title>
+      <link>http://localhost:1313/publications/example-publication-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/example-publication-3/</guid>
+      <description>&lt;p&gt;Abstract: An investigation into the implementation of explainable AI techniques in clinical decision support systems, emphasizing the importance of interpretability in healthcare applications.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Machine Learning Applications in Healthcare: A Systematic Review</title>
+      <link>http://localhost:1313/publications/example-publication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/example-publication/</guid>
+      <description>&lt;p&gt;Abstract: This systematic review examines the current state of machine learning applications in healthcare, focusing on practical implementations and future directions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Predictive Analytics in Patient Care: A Review of Methods and Applications</title>
+      <link>http://localhost:1313/publications/example-publication-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/example-publication-4/</guid>
+      <description>&lt;p&gt;Abstract: A comprehensive review of predictive analytics methods in patient care, exploring their implementation, effectiveness, and impact on healthcare outcomes.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
