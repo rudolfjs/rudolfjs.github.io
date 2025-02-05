@@ -11,56 +11,79 @@
 /* Publications Styling */
 .publication-year {
   font-family: var(--font-serif);
-  font-size: 1.875rem;
+  font-size: 2.75rem;
   font-weight: 700;
   @apply text-gray-900 dark:text-gray-100;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  @apply border-b-2 border-gray-200 dark:border-gray-700;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
+.publication-year:first-of-type {
+  margin-top: 2rem;
 }
 
 .publication-entry {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  @apply border-b border-gray-200 dark:border-gray-700;
+  padding: 0.75rem 0;
+  margin-left: 1rem;
+  position: relative;
+}
+
+.publication-entry:before {
+  content: "";
+  position: absolute;
+  left: -0.75rem;
+  top: 1.25rem;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  @apply bg-gray-400 dark:bg-gray-500;
 }
 
 .publication-title {
   font-family: var(--font-serif);
   font-size: 1.25rem;
+  line-height: 1.4;
   font-weight: 600;
   @apply text-gray-900 dark:text-gray-100;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .publication-authors {
+  font-size: 1rem;
+  line-height: 1.6;
   @apply text-gray-700 dark:text-gray-300;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .publication-journal {
   font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
   @apply text-gray-600 dark:text-gray-400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .publication-meta {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
   font-size: 0.875rem;
   @apply text-gray-600 dark:text-gray-400;
 }
 
 .publication-doi {
+  font-weight: 500;
   @apply text-blue-600 dark:text-blue-400;
   text-decoration: none;
-  transition: color 0.2s ease;
+  padding: 0.25rem 0;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
 }
 
 .publication-doi:hover {
-  @apply text-blue-800 dark:text-blue-300;
-  text-decoration: underline;
+  @apply text-blue-700 dark:text-blue-300;
+  border-bottom-color: currentColor;
 }
 
 /* Container */
@@ -77,6 +100,16 @@
   }
   
   .publication-year {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .publication-year:first-of-type {
+    margin-top: 1.5rem;
+  }
+
+  .publication-entry {
+    padding: 0.5rem 0;
   }
 }
