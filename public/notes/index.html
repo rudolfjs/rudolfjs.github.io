@@ -23,8 +23,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Technical Blog | RUDOLF J.</title>
-    <meta name="description" content="An introduction to my blog and what to expect">
+    <title>Notes | RUDOLF J.</title>
+    <meta name="description" content="Technical insights, research notes, and discussions on digital health and ML">
     
     
     <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
@@ -417,104 +417,18 @@
     <main class="container mx-auto px-4 py-10 max-w-3xl">
         <div class="prose prose-lg dark:prose-invert prose-headings:roboto-flex-heading prose-h1:text-blue-300 prose-h2:text-blue-200 prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-a:no-underline prose-a:border-b prose-a:border-blue-400 hover:prose-a:border-blue-300 prose-a:pb-0.5 prose-a:transition-colors prose-pre:bg-gray-900 max-w-none">
             
-<article class="prose dark:prose-invert xl:prose-xl mx-auto">
-    <header class="not-prose mb-12">
-        <h1 class="text-4xl font-bold mb-4 text-white">Welcome to My Technical Blog</h1>
-        
-        <p class="text-xl text-gray-300 mb-4">An introduction to my blog and what to expect</p>
-        
-        <div class="flex flex-wrap items-center gap-4">
-            
-            <time class="text-sm text-gray-400 flex items-center">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                February 1, 2025
-            </time>
-            
-            
-            <div class="flex items-center text-sm text-gray-400">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                </svg>
-                General
-            </div>
-            
-        </div>
-        
-        <div class="mt-4 flex flex-wrap gap-2">
-            
-            <span class="tag">#introduction</span>
-            
-            <span class="tag">#machine-learning</span>
-            
-            <span class="tag">#healthcare</span>
-            
-        </div>
-        
-    </header>
-
-    <div class="content mt-8 space-y-6">
-        <h2 id="welcome-to-my-technical-blog">Welcome to My Technical Blog</h2>
-<p>This is where I&rsquo;ll be sharing insights about machine learning in healthcare, digital health solutions, and technical implementations. Expect detailed technical content, code examples, and research discussions.</p>
-<h3 id="what-to-expect">What to Expect</h3>
-<p>Posts will include:</p>
-<ol>
-<li>Technical tutorials with code examples</li>
-<li>Research insights and findings</li>
-<li>Implementation strategies</li>
-<li>Healthcare ML case studies</li>
-</ol>
-<h3 id="example-code-snippet">Example Code Snippet</h3>
-<p>Here&rsquo;s a simple example of how code will be presented in the blog:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">prepare_healthcare_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s2">    Prepare healthcare dataset for ML training
-</span></span></span><span class="line"><span class="cl"><span class="s2">    
-</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
-</span></span></span><span class="line"><span class="cl"><span class="s2">        data (pd.DataFrame): Input healthcare data
-</span></span></span><span class="line"><span class="cl"><span class="s2">        target_col (str): Name of the target column
-</span></span></span><span class="line"><span class="cl"><span class="s2">        test_size (float): Proportion of test set
-</span></span></span><span class="line"><span class="cl"><span class="s2">        
-</span></span></span><span class="line"><span class="cl"><span class="s2">    Returns:
-</span></span></span><span class="line"><span class="cl"><span class="s2">        Tuple of train and test sets
-</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">target_col</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</span></span></code></pre></div><h3 id="mathematics-and-formulas">Mathematics and Formulas</h3>
-<p>We can also include mathematical formulas when needed:</p>
-<p>$$
-\text{accuracy} = \frac{\text{true positives} + \text{true negatives}}{\text{total samples}}
-$$</p>
-<h3 id="future-topics">Future Topics</h3>
-<p>Some topics I plan to cover:</p>
-<ul>
-<li>Implementing ML models for healthcare prediction</li>
-<li>Working with FHIR and HL7 data</li>
-<li>Best practices for healthcare data preprocessing</li>
-<li>Performance optimization in ML models</li>
-<li>Real-world case studies</li>
-</ul>
-<p>Stay tuned for more technical content!</p>
-
-    </div>
-
+  <div class="prose dark:prose-invert max-w-none">
     
-
+      
+      <ul class="list-disc pl-6">
+        
+          <li class="py-2">
+            <a href="/notes/posts/welcome-post/" class="text-blue-600 hover:text-blue-800">Welcome to My Technical Blog</a>
+          </li>
+        
+      </ul>
     
-    <footer class="not-prose mt-12 pt-6 border-t border-gray-700">
-        <nav class="flex justify-between items-center">
-            
-            
-        </nav>
-    </footer>
-    
-</article>
+  </div>
 
         </div>
     </main>

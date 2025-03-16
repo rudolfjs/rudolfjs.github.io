@@ -1,99 +1,369 @@
 /* Typography and Colors */
 :root {
-  --font-serif: "Source Serif Pro", Georgia, serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Roboto Serif", "Source Serif Pro", Georgia, serif;
+  --font-sans: "Roboto Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Roboto Mono", "JetBrains Mono", Consolas, Monaco, monospace;
+  --font-display: "Major Mono Display", monospace;
 }
 
 .dark {
   color-scheme: dark;
 }
 
+/* Import variable fonts */
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,0,100,100..1000,0,96,468,79,750,-203,738,514,712&family=Roboto+Mono:wght@400;500&family=Roboto+Serif:ital,opsz,wdth,wght@0,8..144,75..125,100..900;1,8..144,75..125,100..900&display=swap');
+
+/* Roboto Flex custom variations */
+.roboto-flex-normal {
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+
+.roboto-flex-light {
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 90,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+
+.roboto-flex-semibold {
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 100,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+
+.roboto-flex-heading {
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 105,
+    "GRAD" 0,
+    "XOPQ" 110,
+    "XTRA" 468,
+    "YOPQ" 75,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 530,
+    "YTUC" 725;
+}
+
+/* Site title style */
+.site-title {
+  font-family: "Major Mono Display", monospace;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Blog Styling */
+.post-card {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  transition: all 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.post-date {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.post-title {
+  font-size: 1.5rem;
+  color: #f1f5f9;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 105,
+    "GRAD" 0,
+    "XOPQ" 110,
+    "XTRA" 468,
+    "YOPQ" 75,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 530,
+    "YTUC" 725;
+}
+
+.post-excerpt {
+  color: #d1d5db;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-variation-settings:
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.post-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  letter-spacing: 0.05em;
+  font-variation-settings:
+    "wdth" 95,
+    "GRAD" 0,
+    "XOPQ" 100,
+    "XTRA" 468;
+}
+
 /* Publications Styling */
 .publication-year {
-  font-family: var(--font-serif);
-  font-size: 2.75rem;
   font-weight: 700;
-  @apply text-gray-900 dark:text-gray-100;
+  font-size: 2.75rem;
+  color: #f3f4f6;
   margin-top: 5rem;
   margin-bottom: 4rem;
+  position: relative;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 110,
+    "GRAD" 0,
+    "XOPQ" 120,
+    "XTRA" 468,
+    "YOPQ" 70,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 730;
 }
 
 .publication-year:first-of-type {
   margin-top: 2rem;
 }
 
+.publication-year::after {
+  content: "";
+  position: absolute;
+  bottom: -1.25rem;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  background-color: #3b82f6;
+  border-radius: 2px;
+}
+
 .publication-entry {
-  padding: 0.75rem 0;
+  padding: 1.25rem 0;
   margin-left: 1rem;
   position: relative;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.publication-entry:last-child {
+  border-bottom: none;
 }
 
 .publication-entry:before {
   content: "";
   position: absolute;
-  left: -0.75rem;
-  top: 1.25rem;
-  width: 3px;
-  height: 3px;
+  left: -1rem;
+  top: 1.75rem;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  @apply bg-gray-400 dark:bg-gray-500;
+  background-color: #60a5fa;
 }
 
 .publication-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   line-height: 1.4;
-  font-weight: 600;
-  @apply text-gray-900 dark:text-gray-100;
+  color: #f3f4f6;
   margin-bottom: 0.75rem;
+  transition: color 0.2s ease;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 105,
+    "GRAD" 0,
+    "XOPQ" 110,
+    "XTRA" 468,
+    "YOPQ" 75,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 530,
+    "YTUC" 725;
+}
+
+.publication-title:hover {
+  color: #60a5fa;
 }
 
 .publication-authors {
   font-size: 1rem;
   line-height: 1.6;
-  @apply text-gray-700 dark:text-gray-300;
+  color: #d1d5db;
   margin-bottom: 0.5rem;
+  font-variation-settings:
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79;
+}
+
+.publication-authors em {
+  font-style: normal;
+  font-weight: 500;
+  color: #e5e7eb;
+  background: linear-gradient(to right, #60a5fa20, transparent);
+  padding: 0 0.25rem;
 }
 
 .publication-journal {
   font-style: italic;
   font-size: 1rem;
   line-height: 1.5;
-  @apply text-gray-600 dark:text-gray-400;
-  margin-bottom: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+  font-variation-settings:
+    "slnt" -10,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96;
 }
 
 .publication-meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.5rem;
   margin-top: 1rem;
   font-size: 0.875rem;
-  @apply text-gray-600 dark:text-gray-400;
+  color: #9ca3af;
 }
 
 .publication-doi {
   font-weight: 500;
-  @apply text-blue-600 dark:text-blue-400;
+  color: #60a5fa;
   text-decoration: none;
   padding: 0.25rem 0;
   transition: all 0.2s ease;
   border-bottom: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  font-variation-settings:
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 100,
+    "XTRA" 468;
 }
 
 .publication-doi:hover {
-  @apply text-blue-700 dark:text-blue-300;
+  color: #93c5fd;
   border-bottom-color: currentColor;
+}
+
+.publication-doi svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.25rem;
 }
 
 /* Container */
 .container {
-  max-width: 65ch;
+  max-width: 72ch;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+  .publication-title {
+    font-size: 1.25rem;
+  }
+  
+  .publication-year {
+    font-size: 2.25rem;
+    margin-top: 3.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .publication-year:first-of-type {
+    margin-top: 1.5rem;
+  }
+
+  .publication-entry {
+    padding: 1rem 0;
+  }
+  
+  .post-card {
+    padding: 1.25rem;
+  }
+  
+  .post-title {
+    font-size: 1.35rem;
+  }
+}
+
 @media (max-width: 640px) {
   .publication-title {
     font-size: 1.125rem;
@@ -105,11 +375,19 @@
     margin-bottom: 2rem;
   }
 
-  .publication-year:first-of-type {
-    margin-top: 1.5rem;
-  }
-
   .publication-entry {
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
+  }
+  
+  .post-card {
+    padding: 1rem;
+  }
+  
+  .post-title {
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
   }
 }

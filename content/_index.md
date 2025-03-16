@@ -13,4 +13,4 @@ I'm a researcher in Information Technology, specializing in digital health and m
 - Digital Health Solutions
 - Information Technology Applications in Medicine
 
-[View my publications](/publications) or [read my blog](/blog) for more insights into my research and technical discussions.
+[View my publications](/publications) for more insights into my research and technical discussions.
