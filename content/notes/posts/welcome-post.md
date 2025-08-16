@@ -4,7 +4,7 @@ date: 2025-02-01
 description: "An introduction to my blog and what to expect"
 categories: ["CompSci"]
 tags: ["introduction", "machine-learning", "healthcare"]
-draft: false
+draft: true
 ---
 
 ## Welcome to My Technical Blog
