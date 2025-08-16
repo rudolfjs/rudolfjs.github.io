@@ -2,8 +2,8 @@
 title: "Welcome to My Technical Blog"
 date: 2025-02-01
 description: "An introduction to my blog and what to expect"
-#categories: ["General"]
-#tags: ["introduction", "machine-learning", "healthcare"]
+categories: ["CompSci"]
+tags: ["introduction", "machine-learning", "healthcare"]
 draft: false
 ---
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Healthcare on Rudolf J</title>
-    <link>http://localhost:1314/tags/healthcare/</link>
-    <description>Recent content in Healthcare on Rudolf J</description>
+    <title>CompSci on Rudolf J</title>
+    <link>http://localhost:1314/categories/compsci/</link>
+    <description>Recent content in CompSci on Rudolf J</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 16 Mar 2025 21:06:00 +1000</lastBuildDate>
-    <atom:link href="http://localhost:1314/tags/healthcare/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1314/categories/compsci/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Welcome to My Technical Blog</title>
       <link>http://localhost:1314/notes/posts/welcome-post/</link>

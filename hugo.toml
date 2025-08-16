@@ -1,6 +1,6 @@
 baseURL = 'https://rudolfj.github.io/'
 languageCode = 'en-us'
-title = 'RUDOLF J.'
+title = 'Rudolf J'
 theme = 'minimal-research'
 
 # Enable syntax highlighting
@@ -23,17 +23,9 @@ enableGitInfo = true
     url = '/'
     weight = 1
   [[menu.main]]
-    name = 'About'
-    url = '/about/'
-    weight = 2
-  [[menu.main]]
     name = 'Publications'
     url = '/publications/'
     weight = 3
-  [[menu.main]]
-    name = 'Projects'
-    url = '/projects/'
-    weight = 4
   [[menu.main]]
     name = 'Notes'
     url = '/notes/'

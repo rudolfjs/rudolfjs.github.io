@@ -1,35 +1,72 @@
 {{ define "main" }}
-  <div class="prose dark:prose-invert max-w-none">
+  <div class="max-w-6xl mx-auto">
     {{ if eq .Section "publications" }}
-      {{/* Publications sorted by year */}}
+      <!-- Publications Page Header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Publications</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">Research publications in digital health, machine learning, and clinical informatics</p>
+      </div>
+      
+      <!-- Publications sorted by year -->
       {{ $pages := .Pages.ByParam "year" }}
       {{ $pages = $pages.Reverse }}
+      {{ $currentYear := 0 }}
+      
       {{ range $pages }}
-        {{ if ne .Params.year ($.Scratch.Get "current_year") }}
-          {{ $.Scratch.Set "current_year" .Params.year }}
-          <h2 class="publication-year">{{ .Params.year }}</h2>
+        {{ if ne .Params.year $currentYear }}
+          {{ $currentYear = .Params.year }}
+          <!-- Large Year Header -->
+          <div class="year-section mb-8 mt-16 first:mt-0">
+            <h2 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700">
+              {{ .Params.year }}
+            </h2>
+          </div>
         {{ end }}
-          <article class="publication-entry">
-            <h3 class="publication-title">{{ .Title }}</h3>
-            <p class="publication-authors">{{ .Params.authors }}</p>
-            <p class="publication-journal">{{ .Params.journal }}</p>
-            <div class="publication-meta">
-              <span>{{ .Params.year }}</span>
-              {{ with .Params.doi }}
-                <a href="{{ . }}" class="publication-doi">DOI</a>
-              {{ end }}
-            </div>
-          </article>
+        
+        <!-- Publication Card -->
+        {{ partial "publication-card.html" . }}
       {{ end }}
+      
+      <!-- If no publications -->
+      {{ if not $pages }}
+        <div class="text-center py-12">
+          <p class="text-gray-500 dark:text-gray-400">No publications available yet.</p>
+        </div>
+      {{ end }}
+      
+    {{ else if eq .Section "notes" }}
+      <!-- Notes Page Header -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Recent</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">Technical insights, research notes, and discussions on digital health and ML</p>
+      </div>
+      
+      <!-- Show only the 5 most recent notes -->
+      {{ $recentPages := first 5 (.Pages.ByDate.Reverse) }}
+      
+      {{ range $recentPages }}
+        <!-- Note Card -->
+        {{ partial "note-card.html" . }}
+      {{ end }}
+      
+      <!-- If no notes -->
+      {{ if not $recentPages }}
+        <div class="text-center py-12">
+          <p class="text-gray-500 dark:text-gray-400">No notes available yet.</p>
+        </div>
+      {{ end }}
+      
     {{ else }}
       <!-- Default list layout for other sections -->
-      <ul class="list-disc pl-6">
-        {{ range .Pages }}
-          <li class="py-2">
-            <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">{{ .Title }}</a>
-          </li>
-        {{ end }}
-      </ul>
+      <div class="prose dark:prose-invert max-w-none">
+        <ul class="list-disc pl-6">
+          {{ range .Pages }}
+            <li class="py-2">
+              <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
     {{ end }}
   </div>
 {{ end }}
