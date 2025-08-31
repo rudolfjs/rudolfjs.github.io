@@ -1,11 +1,21 @@
+# Hugo build outputs
+/public/
+/resources/
+.hugo_build.lock
+
+# Editor directories and files
 .vscode/
 .history/
 .idea/
 *.sublime-workspace
 *.sublime-project
 *.code-workspace
+
+# Temporary files
 *.tmp
 *.log
+
+# AI assistant configs
 CLAUDE.md
 GEMINI.md
 .claude

@@ -14,11 +14,14 @@
                 <a href="https://orcid.org/0000-0001-5129-5601" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-200" title="ORCID Profile">
                     <i class="fas fa-id-badge text-2xl"></i>
                 </a>
+                <a href="https://github.com/rudolfj" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-200" title="GitHub Profile">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
                 <a href="https://www.linkedin.com/in/rudolfj/" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-200" title="LinkedIn Profile">
                     <i class="fab fa-linkedin text-2xl"></i>
                 </a>
-                <a href="https://github.com/rudolfj" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-200" title="GitHub Profile">
-                    <i class="fab fa-github text-2xl"></i>
+                <a href="https://bsky.app/profile/rudolfj.bsky.social" target="_blank" class="text-white hover:text-blue-300 transition-colors duration-200" title="Bluesky Profile">
+                    <i class="fab fa-bluesky text-2xl"></i>
                 </a>
                 <a href="mailto:r.schnetler@uq.edu.au" class="text-white hover:text-blue-300 transition-colors duration-200" title="Email">
                     <i class="fas fa-envelope text-2xl"></i>
@@ -34,12 +37,12 @@
 
     <!-- Recent Publications -->
     <section class="mb-16">
-        <h2 class="text-2xl font-bold text-white mb-6">Recent Publications</h2>
+        <h2 class="text-3xl font-bold text-white mb-8">Recent Publications</h2>
         <div class="space-y-4">
-            {{ range first 3 (where .Site.RegularPages "Section" "publications") }}
+            {{ range first 3 ((where .Site.RegularPages "Section" "publications").ByParam "year").Reverse }}
             <div class="border-l-2 border-gray-600 pl-4">
                 <h3 class="text-lg font-medium mb-1">
-                    <a href="{{ .Permalink }}" class="text-gray-200 hover:text-blue-400 transition-colors">{{ .Title }}</a>
+                    <a href="/publications#{{ .File.BaseFileName }}" class="text-gray-200 hover:text-blue-400 transition-colors">{{ .Title }}</a>
                 </h3>
                 <p class="text-sm text-gray-500">
                     {{ if reflect.IsSlice .Params.authors }}
@@ -61,7 +64,7 @@
 
     <!-- Recent Notes -->
     <section class="mb-16">
-        <h2 class="text-2xl font-bold text-white mb-6">Recent Notes</h2>
+        <h2 class="text-3xl font-bold text-white mb-8">Recent Notes</h2>
         <div class="space-y-4">
             {{ range first 3 (where (where .Site.RegularPages "Section" "in" (slice "blog" "notes")) ".Draft" "eq" false) }}
             <div class="border-l-2 border-gray-600 pl-4">

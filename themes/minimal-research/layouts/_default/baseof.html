@@ -27,7 +27,7 @@
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
@@ -75,6 +75,8 @@
                                 h2: {
                                     color: '#1a1a1a',
                                     fontWeight: '600',
+                                    fontSize: '1.75rem',
+                                    marginTop: '2.5rem',
                                     lineHeight: '1.3',
                                     fontVariationSettings: '"slnt" 0, "wdth" 105, "GRAD" 0, "XOPQ" 110, "XTRA" 468, "YOPQ" 75, "YTUC" 725',
                                     letterSpacing: '-0.01em',
@@ -121,6 +123,20 @@
                                     fontStyle: 'italic',
                                     borderLeftColor: '#d1d5db',
                                 },
+                                ul: {
+                                    listStyleType: 'disc',
+                                    paddingLeft: '1.625em',
+                                },
+                                'ul > li': {
+                                    paddingLeft: '0.375em',
+                                },
+                                ol: {
+                                    listStyleType: 'decimal',
+                                    paddingLeft: '1.625em',
+                                },
+                                'ol > li': {
+                                    paddingLeft: '0.375em',
+                                },
                             },
                         },
                         dark: {
@@ -143,6 +159,8 @@
                                 },
                                 h2: {
                                     color: '#f3f4f6',
+                                    fontSize: '1.75rem',
+                                    marginTop: '2.5rem',
                                     fontVariationSettings: '"slnt" 0, "wdth" 105, "GRAD" 0, "XOPQ" 110, "XTRA" 468, "YOPQ" 75, "YTUC" 725',
                                     letterSpacing: '-0.01em',
                                 },
@@ -175,11 +193,17 @@
                                     }
                                 },
                                 ul: {
-                                    li: {
-                                        '&:before': {
-                                            backgroundColor: '#9ca3af',
-                                        }
+                                    listStyleType: 'disc',
+                                    paddingLeft: '1.625em',
+                                    '& ::marker': {
+                                        color: '#9ca3af',
                                     }
+                                },
+                                'ul > li': {
+                                    paddingLeft: '0.375em',
+                                },
+                                'ol > li': {
+                                    paddingLeft: '0.375em',
                                 },
                                 thead: {
                                     color: '#f1f5f9',
@@ -337,6 +361,35 @@
             text-align: right;
         }
         
+        /* List styles fix */
+        .prose ul {
+            list-style-type: disc !important;
+            padding-left: 1.625em !important;
+        }
+        
+        .prose ul li {
+            list-style-type: disc !important;
+            padding-left: 0.375em !important;
+        }
+        
+        .prose ol {
+            list-style-type: decimal !important;
+            padding-left: 1.625em !important;
+        }
+        
+        .prose ol li {
+            list-style-type: decimal !important;
+            padding-left: 0.375em !important;
+        }
+        
+        .dark .prose ul li::marker {
+            color: #9ca3af !important;
+        }
+        
+        .dark .prose ol li::marker {
+            color: #9ca3af !important;
+        }
+        
         /* Inline code styling */
         :not(pre) > code {
             background: #2d3748;
@@ -389,6 +442,21 @@
         
         .font-caption {
             font-variation-settings: "GRAD" 0, "wdth" 95, "XOPQ" 90, "YOPQ" 80;
+        }
+    </style>
+    <style>
+        /* Custom styles for Research Interests heading */
+        .prose h2#research-interests {
+            font-size: 1.5rem !important;
+            margin-top: 2rem !important;
+            font-weight: 600 !important;
+        }
+        
+        /* Ensure dark mode styles apply */
+        .dark .prose h2#research-interests {
+            font-size: 1.5rem !important;
+            margin-top: 2rem !important;
+            color: #f3f4f6 !important;
         }
     </style>
 </head>
