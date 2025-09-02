@@ -18,11 +18,11 @@ draft: true
 
 ## Install tmux
 
--
+`sudo dnf -y install tmux`
 
 ## Install Zellij
 
-- 
+
 
 ## Install Cloudflared
 
@@ -34,4 +34,6 @@ draft: true
 
 ## References
 
-- 
+1. https://www.redhat.com/en/blog/introduction-tmux-linux
+2. https://github.com/zellij-org/zellij
+3. https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/
