@@ -10,10 +10,10 @@ draft: true
 
 # Environment
 
-1. AlmaLinux 9.6 (Sage Margay) <!-- Change to Fedora -->
-2. Zellij
-3. tmux
-4. Cloudflared
+1. Fedora Linux 42
+2. Zellij 0.43.1
+3. tmux 3.5a-4.fc42
+4. Cloudflared 2025.8.1
 
 
 ## Install tmux
@@ -27,33 +27,21 @@ sudo dnf -y install tmux
 Zellij is a modern terminal workspace and multiplexer written in Rust.
 
 ### Download and Install
-<!-- change to cargo -->
+1. Install cargo
 
-1. Create a local bin directory for user installations:
-```bash
-mkdir -p ~/.local/bin
+```bash 
+curl https://sh.rustup.rs -sSf | sh
 ```
 
-2. Download Zellij for Linux:
+_Note: I recommend to create a new terminal here as this install will add cargo to PATH._
+
+2. Install Zellij
+
 ```bash
-cd /tmp
-wget https://github.com/zellij-org/zellij/releases/download/v0.43.1/zellij-x86_64-unknown-linux-musl.tar.gz
+cargo install --locked zellij
 ```
 
-3. Extract and install the binary:
-```bash
-tar -xvf zellij-x86_64-unknown-linux-musl.tar.gz
-chmod +x zellij
-mv zellij ~/.local/bin/
-```
-
-4. Add the local bin directory to your PATH:
-```bash
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-5. Verify the installation:
+3. Verify the installation:
 ```bash
 zellij --version
 # Output: zellij 0.43.1
@@ -69,6 +57,25 @@ zellij
 Or attach to an existing session:
 ```bash
 zellij attach
+```
+
+### Basic Usage
+
+```bash
+# Show current sessions
+zellij list-sessions
+# You can resurrect a session by, provides with the previous layout, etc.
+zellij attach
+# Kill session means to stop an active session, it will report as `EXITED`
+## Kill a session 
+zellij kill-session [name]
+## Kill all sessions
+zellij kill-all-sessions 
+# To clear old session in `EXITED` status
+## Delete a session
+zellij delete-session [name]
+## Delete all old sessions
+zellij delete-all-sessions
 ```
 
 ## Install Cloudflared and Setup Zero Trust SSH Access
@@ -247,13 +254,13 @@ ssh workstation
 
 ## Notes
 
-- All Cloudflare configuration done via Web UI (no CLI needed except initial install)
 - No SSH ports exposed to internet
 - Virtual IP avoids home network conflicts
-- Consider SSH keys over passwords for better security
+- Future work: Update this note to use SSH keys over passwords
 
 ## References
 
-1. https://www.redhat.com/en/blog/introduction-tmux-linux
-2. https://github.com/zellij-org/zellij
-3. https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/
+1. [Introduction to tmux](https://www.redhat.com/en/blog/introduction-tmux-linux)
+2. [Zellij](https://github.com/zellij-org/zellij)
+3. [Cloudflared Download](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/)
+4. [Cloudflare - Connect Private Networks](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/cloudflared/)
