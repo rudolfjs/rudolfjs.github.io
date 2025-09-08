@@ -18,5 +18,6 @@
 # AI assistant configs
 CLAUDE.md
 GEMINI.md
+AGENTS.md
 .claude
 .copilot
