@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" x-data="darkModeConfig" class="dark">
+<head>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('darkModeConfig', () => ({
+                darkMode: true,
+                init() {
+                    // Always use dark mode
+                    this.darkMode = true;
+                    localStorage.setItem('darkMode', JSON.stringify(true));
+                    
+                    this.$watch('darkMode', value => {
+                        // Force dark mode
+                        if (!value) {
+                            this.darkMode = true;
+                            localStorage.setItem('darkMode', JSON.stringify(true));
+                        }
+                    });
+                }
+            }));
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Roboto Flex', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        'serif': ['Roboto Serif', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+                        'mono': ['Roboto Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+                        'display': ['Major Mono Display', 'monospace'],
+                    },
+                    maxWidth: {
+                        'prose': '70ch',
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: '100ch',
+                                color: '#1a1a1a',
+                                fontFamily: 'var(--font-sans)',
+                                lineHeight: '1.6',
+                                a: {
+                                    color: '#3182ce',
+                                    '&:hover': {
+                                        color: '#2c5282',
+                                    },
+                                    textDecoration: 'none',
+                                    borderBottom: '1px solid #3182ce',
+                                    paddingBottom: '1px',
+                                    transition: 'all 0.2s ease',
+                                },
+                                h1: {
+                                    color: '#1a1a1a',
+                                    fontWeight: '700',
+                                    lineHeight: '1.2',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 110, "GRAD" 0, "XOPQ" 120, "XTRA" 468, "YOPQ" 70, "YTUC" 730',
+                                    letterSpacing: '-0.01em',
+                                },
+                                h2: {
+                                    color: '#1a1a1a',
+                                    fontWeight: '600',
+                                    fontSize: '1.75rem',
+                                    marginTop: '2.5rem',
+                                    lineHeight: '1.3',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 105, "GRAD" 0, "XOPQ" 110, "XTRA" 468, "YOPQ" 75, "YTUC" 725',
+                                    letterSpacing: '-0.01em',
+                                },
+                                h3: {
+                                    color: '#1a1a1a',
+                                    fontWeight: '600',
+                                    lineHeight: '1.3',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 105, "GRAD" 0, "XOPQ" 105, "XTRA" 468, "YOPQ" 75, "YTUC" 720',
+                                },
+                                'h4,h5,h6': {
+                                    color: '#1a1a1a',
+                                    fontWeight: '600',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 100, "GRAD" 0, "XOPQ" 100, "XTRA" 468, "YOPQ" 75, "YTUC" 715',
+                                },
+                                p: {
+                                    marginTop: '1.25em',
+                                    marginBottom: '1.25em',
+                                    lineHeight: '1.65',
+                                    fontVariationSettings: '"wdth" 100, "GRAD" 0, "XOPQ" 96, "XTRA" 468, "YOPQ" 79',
+                                },
+                                code: {
+                                    color: '#dd1144',
+                                    fontFamily: 'var(--font-mono)',
+                                    fontWeight: '400',
+                                },
+                                pre: {
+                                    backgroundColor: '#1e293b',
+                                    color: '#e2e8f0',
+                                    fontFamily: 'var(--font-mono)',
+                                    fontSize: '0.9em',
+                                    padding: '1.5em',
+                                    borderRadius: '0.5em',
+                                    overflow: 'auto',
+                                },
+                                'pre code': {
+                                    color: 'inherit',
+                                    backgroundColor: 'transparent',
+                                    padding: '0',
+                                    fontSize: 'inherit',
+                                    fontWeight: '400',
+                                },
+                                blockquote: {
+                                    fontStyle: 'italic',
+                                    borderLeftColor: '#d1d5db',
+                                },
+                                ul: {
+                                    listStyleType: 'disc',
+                                    paddingLeft: '1.625em',
+                                },
+                                'ul > li': {
+                                    paddingLeft: '0.375em',
+                                },
+                                ol: {
+                                    listStyleType: 'decimal',
+                                    paddingLeft: '1.625em',
+                                },
+                                'ol > li': {
+                                    paddingLeft: '0.375em',
+                                },
+                            },
+                        },
+                        dark: {
+                            css: {
+                                color: '#e2e8f0',
+                                a: {
+                                    color: '#63b3ed',
+                                    '&:hover': {
+                                        color: '#90cdf4',
+                                    },
+                                    borderBottom: '1px solid #63b3ed',
+                                },
+                                strong: {
+                                    color: '#f1f5f9',
+                                },
+                                h1: {
+                                    color: '#f3f4f6',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 110, "GRAD" 0, "XOPQ" 120, "XTRA" 468, "YOPQ" 70, "YTUC" 730',
+                                    letterSpacing: '-0.01em',
+                                },
+                                h2: {
+                                    color: '#f3f4f6',
+                                    fontSize: '1.75rem',
+                                    marginTop: '2.5rem',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 105, "GRAD" 0, "XOPQ" 110, "XTRA" 468, "YOPQ" 75, "YTUC" 725',
+                                    letterSpacing: '-0.01em',
+                                },
+                                h3: {
+                                    color: '#f3f4f6',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 105, "GRAD" 0, "XOPQ" 105, "XTRA" 468, "YOPQ" 75, "YTUC" 720',
+                                },
+                                'h4,h5,h6': {
+                                    color: '#f3f4f6',
+                                    fontVariationSettings: '"slnt" 0, "wdth" 100, "GRAD" 0, "XOPQ" 100, "XTRA" 468, "YOPQ" 75, "YTUC" 715',
+                                },
+                                code: {
+                                    color: '#f472b6',
+                                },
+                                pre: {
+                                    backgroundColor: '#0f172a',
+                                },
+                                blockquote: {
+                                    color: '#d1d5db',
+                                    borderLeftColor: '#4b5563',
+                                },
+                                hr: {
+                                    borderColor: '#374151',
+                                },
+                                ol: {
+                                    li: {
+                                        '&:before': {
+                                            color: '#9ca3af',
+                                        }
+                                    }
+                                },
+                                ul: {
+                                    listStyleType: 'disc',
+                                    paddingLeft: '1.625em',
+                                    '& ::marker': {
+                                        color: '#9ca3af',
+                                    }
+                                },
+                                'ul > li': {
+                                    paddingLeft: '0.375em',
+                                },
+                                'ol > li': {
+                                    paddingLeft: '0.375em',
+                                },
+                                thead: {
+                                    color: '#f1f5f9',
+                                    borderBottomColor: '#4b5563',
+                                },
+                                tbody: {
+                                    tr: {
+                                        borderBottomColor: '#1f2937',
+                                    }
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            plugins: [
+                tailwind.plugin.withOptions(() => {
+                    return function({ addBase, theme }) {
+                        addBase({
+                            'html.dark': {
+                                'color-scheme': 'dark',
+                            },
+                        })
+                    }
+                }),
+            ],
+        }
+    </script>
+    
+    <!-- Custom styles for content headers -->
+    <style>
+        /* Direct styling for headers within content div to ensure proper hierarchy */
+        .content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f3f4f6;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-top: 1.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        .content h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content h6 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Ensure first header doesn't have too much top margin */
+        .content > h1:first-child,
+        .content > h2:first-child,
+        .content > h3:first-child {
+            margin-top: 0;
+        }
+        
+        /* Mermaid diagram styling */
+        .mermaid {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            overflow: auto;
+        }
+        
+        /* Dark theme for Mermaid */
+        .dark .mermaid {
+            background: #0f172a;
+        }
+    </style>
+    
+    <!-- KaTeX for math rendering -->
+    {{ if .Site.Params.math }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    {{ end }}
+    
+    <!-- Syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-r.min.js"></script>
+    <style>
+        /* Code block styling */
+        pre[class*="language-"] {
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            background: #1e1e1e !important;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+            font-family: var(--font-mono) !important;
+            font-size: 0.9em;
+            letter-spacing: -0.01em;
+        }
+        
+        code[class*="language-"] {
+            text-shadow: none;
+            font-family: var(--font-mono) !important;
+        }
+        
+        /* Token coloring - dark theme optimized */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #608b4e;
+        }
+        
+        .token.punctuation {
+            color: #d4d4d4;
+        }
+        
+        .token.namespace {
+            opacity: 0.7;
+        }
+        
+        .token.property,
+        .token.tag,
+        .token.boolean,
+        .token.number,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #b5cea8;
+        }
+        
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #ce9178;
+        }
+        
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string {
+            color: #d4d4d4;
+        }
+        
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword {
+            color: #569CD6;
+        }
+        
+        .token.function,
+        .token.class-name {
+            color: #4EC9B0;
+        }
+        
+        .token.regex,
+        .token.important,
+        .token.variable {
+            color: #dcdcaa;
+        }
+        
+        /* Line numbers */
+        pre[class*="language-"].line-numbers {
+            position: relative;
+            padding-left: 3.8em;
+            counter-reset: linenumber;
+        }
+        
+        .line-numbers .line-numbers-rows {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            font-size: 100%;
+            left: -3.8em;
+            width: 3em;
+            letter-spacing: -1px;
+            border-right: 1px solid #404040;
+            user-select: none;
+        }
+        
+        .line-numbers-rows > span {
+            display: block;
+            counter-increment: linenumber;
+        }
+        
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #5a5a5a;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+        
+        /* List styles fix */
+        .prose ul {
+            list-style-type: disc !important;
+            padding-left: 1.625em !important;
+        }
+        
+        .prose ul li {
+            list-style-type: disc !important;
+            padding-left: 0.375em !important;
+        }
+        
+        .prose ol {
+            list-style-type: decimal !important;
+            padding-left: 1.625em !important;
+        }
+        
+        .prose ol li {
+            list-style-type: decimal !important;
+            padding-left: 0.375em !important;
+        }
+        
+        .dark .prose ul li::marker {
+            color: #9ca3af !important;
+        }
+        
+        .dark .prose ol li::marker {
+            color: #9ca3af !important;
+        }
+        
+        /* Inline code styling */
+        :not(pre) > code {
+            background: #2d3748;
+            color: #f472b6;
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+            font-family: var(--font-mono);
+        }
+        
+        /* Tag styling */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: #374151;
+            color: #9ca3af;
+            margin: 0.25rem;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-1px);
+            background: #4b5563;
+            color: #e5e7eb;
+        }
+        
+        /* Custom Roboto font utilities */
+        .font-narrow {
+            font-variation-settings: "wdth" 85;
+        }
+        
+        .font-wide {
+            font-variation-settings: "wdth" 115;
+        }
+        
+        .font-casual {
+            font-variation-settings: "GRAD" 1, "slnt" -5;
+        }
+        
+        .font-crisp {
+            font-variation-settings: "GRAD" -1;
+        }
+        
+        .font-display {
+            font-variation-settings: "GRAD" 0, "slnt" 0, "wdth" 115, "XOPQ" 120, "YOPQ" 70;
+        }
+        
+        .font-caption {
+            font-variation-settings: "GRAD" 0, "wdth" 95, "XOPQ" 90, "YOPQ" 80;
+        }
+    </style>
+    <style>
+        /* Custom styles for Research Interests heading */
+        .prose h2#research-interests {
+            font-size: 1.5rem !important;
+            margin-top: 2rem !important;
+            font-weight: 600 !important;
+        }
+        
+        /* Ensure dark mode styles apply */
+        .dark .prose h2#research-interests {
+            font-size: 1.5rem !important;
+            margin-top: 2rem !important;
+            color: #f3f4f6 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 line-numbers roboto-flex-normal">
+    <!-- Header -->
+    <header class="border-b border-gray-700">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-sm roboto-flex-semibold uppercase tracking-wider text-white hover:text-blue-400 font-bold transition-colors duration-200">{{ .Site.Title }}</a>
+                <nav class="flex items-center space-x-6">
+                    {{ range .Site.Menus.main }}
+                    <a href="{{ .URL }}" class="hover:text-blue-400 text-sm roboto-flex-semibold uppercase tracking-wider transition-colors duration-200">{{ .Name }}</a>
+                    {{ end }}
+                    <!-- Removed dark mode toggle since site is always dark -->
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="container mx-auto px-4 py-10 max-w-3xl">
+        <div class="prose prose-lg dark:prose-invert prose-headings:roboto-flex-heading prose-h1:text-blue-300 prose-h2:text-blue-200 prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-a:no-underline prose-a:border-b prose-a:border-blue-400 hover:prose-a:border-blue-300 prose-a:pb-0.5 prose-a:transition-colors prose-pre:bg-gray-900 max-w-none">
+            {{ block "main" . }}{{ end }}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-700 mt-12">
+        <div class="container mx-auto px-4 py-6 max-w-4xl">
+            <div class="flex justify-between items-center text-sm text-gray-400">
+                <div class="font-caption">© {{ now.Format "2006" }} {{ .Site.Params.author }}</div>
+                <div class="flex space-x-6">
+                    {{ with .Site.Params.github }}
+                    <a href="https://github.com/{{ . }}" class="hover:text-blue-400 transition-colors duration-200 uppercase tracking-wider font-caption" target="_blank" rel="noopener">GitHub</a>
+                    {{ end }}
+                    {{ with .Site.Params.linkedin }}
+                    <a href="https://linkedin.com/in/{{ . }}" class="hover:text-blue-400 transition-colors duration-200 uppercase tracking-wider font-caption" target="_blank" rel="noopener">LinkedIn</a>
+                    {{ end }}
+                    {{ with .Site.Params.googleScholar }}
+                    <a href="https://scholar.google.com/citations?user={{ . }}" class="hover:text-blue-400 transition-colors duration-200 uppercase tracking-wider font-caption" target="_blank" rel="noopener">Google Scholar</a>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize KaTeX -->
+    {{ if .Site.Params.math }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    {{ end }}
+    
+    <!-- Mermaid support -->
+    {{ if .Store.Get "hasMermaid" }}
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1e293b',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#475569',
+                lineColor: '#64748b',
+                secondaryColor: '#334155',
+                tertiaryColor: '#1f2937',
+                background: '#0f172a',
+                mainBkg: '#1e293b',
+                secondBkg: '#334155',
+                tertiaryBkg: '#1f2937',
+                primaryBorderColor: '#475569',
+                secondaryBorderColor: '#475569',
+                tertiaryBorderColor: '#475569',
+                textColor: '#e2e8f0',
+                labelTextColor: '#e2e8f0',
+                errorBkgColor: '#7f1d1d',
+                errorTextColor: '#fef2f2',
+                nodeTextColor: '#e2e8f0'
+            }
+        });
+    </script>
+    {{ end }}
+</body>
+</html>

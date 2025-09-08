@@ -4,6 +4,14 @@ Rudolf J profile hosted using GitHub Pages.
 
 ## Development
 
+Install `hugo` locally:
+
+_Assuming Fedora Linux Version: 42, for other platforms please see [Installation](https://gohugo.io/installation/linux/)._
+
+```bash
+sudo dnf install hugo
+```
+
 To run the server locally:
 
 ```bash
