@@ -5,7 +5,7 @@ lastmod: 2025-09-02T10:07:30+10:00
 description: "A remote development solution in terminal using Zellij, tmux and Cloudflared"
 categories: ["platform-engineering"]
 tags: ["cloudflare","tmux","zellij","remote dev"]
-draft: true
+draft: false
 ---
 
 # Environment
