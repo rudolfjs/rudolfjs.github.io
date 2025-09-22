@@ -293,115 +293,6 @@
         .content > h3:first-child {
             margin-top: 0;
         }
-        
-        /* Mermaid diagram styling */
-        .mermaid {
-            background: #1e293b;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin: 2rem 0;
-            overflow: auto;
-        }
-        
-        /* Dark theme for Mermaid */
-        .dark .mermaid {
-            background: #0f172a;
-        }
-        
-        /* Table styling for proper rendering */
-        .prose table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            font-size: 0.875rem;
-            line-height: 1.5;
-        }
-
-        .prose thead {
-            background-color: transparent;
-            border-bottom: 2px solid #4b5563;
-        }
-
-        .prose thead th {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: #ffffff;
-            border: none;
-            border-bottom: 2px solid #4b5563;
-        }
-        
-        /* Remove border from first and last header cells */
-        .prose thead th:first-child {
-            padding-left: 0;
-        }
-        
-        .prose thead th:last-child {
-            padding-right: 0;
-        }
-        
-        .prose tbody tr {
-            border-bottom: 1px solid #374151;
-        }
-        
-        .prose tbody tr:hover {
-            background-color: rgba(31, 41, 55, 0.3);
-        }
-        
-        .prose tbody td {
-            padding: 0.75rem 1rem;
-            border: none;
-            border-right: 1px solid #374151;
-            color: #ffffff;
-        }
-        
-        /* Remove borders from first and last columns */
-        .prose tbody td:first-child {
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .prose tbody td:last-child {
-            padding-right: 0;
-            border-right: none;
-        }
-        
-        .prose table code {
-            font-size: 0.8rem;
-            background: #374151;
-            padding: 0.125rem 0.375rem;
-            border-radius: 0.25rem;
-            color: #ffffff;
-        }
-        
-        /* Ensure first column is slightly bolder for better readability */
-        .prose tbody td:first-child {
-            font-weight: 500;
-            color: #ffffff;
-        }
-        
-        /* Responsive table handling */
-        @media (max-width: 640px) {
-            .prose table {
-                font-size: 0.75rem;
-            }
-            
-            .prose thead th,
-            .prose tbody td {
-                padding: 0.5rem 0.75rem;
-            }
-        }
-        
-        /* Force dark table styles (site is always dark) */
-        .dark .prose thead,
-        .dark .prose thead tr,
-        .dark .prose thead th {
-            background: transparent !important;
-        }
-        .dark .prose tbody td {
-            color: #ffffff !important;
-        }
     </style>
     
     <!-- KaTeX for math rendering -->
@@ -629,6 +520,128 @@
             margin-top: 2rem !important;
             color: #f3f4f6 !important;
         }
+        
+        /* Table styling for proper rendering */
+        .prose table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .prose thead {
+            background-color: transparent;
+            border-bottom: 2px solid #4b5563;
+        }
+        
+        .prose thead th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #ffffff;
+            border: none;
+            border-bottom: 2px solid #4b5563;
+        }
+        
+        /* Remove border from first and last header cells */
+        .prose thead th:first-child {
+            padding-left: 0;
+        }
+        
+        .prose thead th:last-child {
+            padding-right: 0;
+        }
+        
+        .prose tbody tr {
+            border-bottom: 1px solid #374151;
+        }
+        
+        .prose tbody tr:hover {
+            background-color: rgba(31, 41, 55, 0.3);
+        }
+        
+        .prose tbody td {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-right: 1px solid #374151;
+            color: #ffffff;
+        }
+        
+        /* Remove borders from first and last columns */
+        .prose tbody td:first-child {
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .prose tbody td:last-child {
+            padding-right: 0;
+            border-right: none;
+        }
+        
+        .prose table code {
+            font-size: 0.8rem;
+            background: #374151;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            color: #ffffff;
+        }
+        
+        /* Ensure first column is slightly bolder for better readability */
+        .prose tbody td:first-child {
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        /* Responsive table handling */
+        @media (max-width: 640px) {
+            .prose table {
+                font-size: 0.75rem;
+            }
+            
+            .prose thead th,
+            .prose tbody td {
+                padding: 0.5rem 0.75rem;
+            }
+        }
+    </style>
+
+    <!-- Highlighter effect for links -->
+    <style>
+        /* Highlighter effect for content links */
+        .content a:not(.group):not([class*="hover"]),
+        .prose a:not(.group):not([class*="hover"]),
+        article.prose a:not(.group):not([class*="hover"]) {
+            position: relative;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            padding: 0.05em 0.25em !important;
+            margin: 0 -0.05em;
+            border-radius: 0.2em;
+            transition: all 0.15s ease;
+            background-image: linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 50%,
+                rgba(254, 240, 138, 0.7) 50%,
+                rgba(254, 240, 138, 0.7) 100%
+            ) !important;
+        }
+
+        .content a:not(.group):not([class*="hover"]):hover,
+        .prose a:not(.group):not([class*="hover"]):hover,
+        article.prose a:not(.group):not([class*="hover"]):hover {
+            color: #1f2937 !important;
+            font-weight: 700 !important;
+            background-image: linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 15%,
+                rgba(250, 204, 21, 1) 15%,
+                rgba(250, 204, 21, 1) 100%
+            ) !important;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 line-numbers roboto-flex-normal">
@@ -684,37 +697,6 @@
                     {left: "$", right: "$", display: false}
                 ]
             });
-        });
-    </script>
-    {{ end }}
-    
-    <!-- Mermaid support -->
-    {{ if .Store.Get "hasMermaid" }}
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'dark',
-            themeVariables: {
-                primaryColor: '#1e293b',
-                primaryTextColor: '#e2e8f0',
-                primaryBorderColor: '#475569',
-                lineColor: '#64748b',
-                secondaryColor: '#334155',
-                tertiaryColor: '#1f2937',
-                background: '#0f172a',
-                mainBkg: '#1e293b',
-                secondBkg: '#334155',
-                tertiaryBkg: '#1f2937',
-                primaryBorderColor: '#475569',
-                secondaryBorderColor: '#475569',
-                tertiaryBorderColor: '#475569',
-                textColor: '#e2e8f0',
-                labelTextColor: '#e2e8f0',
-                errorBkgColor: '#7f1d1d',
-                errorTextColor: '#fef2f2',
-                nodeTextColor: '#e2e8f0'
-            }
         });
     </script>
     {{ end }}

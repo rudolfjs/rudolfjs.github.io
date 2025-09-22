@@ -4,7 +4,7 @@ date: 2025-08-02
 lastmod: 2025-08-30
 draft: false
 tags: ["certificates", "openssl", "security"]
-categories: ["platform-engineering"]
+categories: ["technical-notes"]
 ---
 
 Converting a PFX certificate to separate key and crt files using OpenSSL.

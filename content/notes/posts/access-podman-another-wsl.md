@@ -2,7 +2,7 @@
 title: "Access Podman from Another WSL Instance"
 date: 2025-08-31T09:13:07+10:00
 lastmod: 2025-08-31T09:13:07+10:00
-categories: ["platform-engineering"]
+categories: ["technical-notes"]
 tags: ["podman", "container", "wsl"]
 draft: false
 ---

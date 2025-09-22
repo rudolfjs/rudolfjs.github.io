@@ -3,7 +3,7 @@ title: "Zellij + tmux + Cloudflared for Remote Development"
 date: 2025-09-02T10:07:30+10:00
 lastmod: 2025-09-02T10:07:30+10:00
 description: "A remote development solution in terminal using Zellij, tmux and Cloudflared"
-categories: ["platform-engineering"]
+categories: ["technical-notes"]
 tags: ["cloudflare","tmux","zellij","remote dev"]
 draft: false
 ---

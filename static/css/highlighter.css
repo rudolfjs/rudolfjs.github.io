@@ -1,0 +1,56 @@
+/* Highlighter effect for content links */
+.content a,
+.prose a,
+article.prose a {
+  position: relative;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  padding: 0.05em 0.25em !important;
+  margin: 0 -0.05em;
+  border-radius: 0.2em;
+  transition: all 0.15s ease;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    rgba(254, 240, 138, 0.7) 50%,
+    rgba(254, 240, 138, 0.7) 100%
+  ) !important;
+  background-position: 0 0;
+  background-size: 100% 100%;
+}
+
+.content a:hover,
+.prose a:hover,
+article.prose a:hover {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 15%,
+    rgba(250, 204, 21, 1) 15%,
+    rgba(250, 204, 21, 1) 100%
+  ) !important;
+}
+
+/* Override Tailwind prose link styles */
+.prose a,
+.prose-lg a,
+.prose-xl a,
+.prose-invert a,
+.dark\:prose-invert a {
+  color: inherit !important;
+}
+
+/* Exclude navigation and special links */
+nav a,
+header a,
+footer a,
+.not-prose a,
+a.group,
+.tag {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
