@@ -30,7 +30,8 @@ My documentation workflow follows a hierarchy based on audience and formality (t
    - **Use**: Journal articles, conference papers, thesis chapters
    - **Output**: PDF for submission, or LaTeX source if required
    - **Why**: Universal journal acceptance, mature ecosystem, required by most publishers
-
+4. **Word.docx**
+   - Only if I **must**.
 # Environment
 
 1. Fedora Linux 42
@@ -39,16 +40,28 @@ My documentation workflow follows a hierarchy based on audience and formality (t
 
 ## Install typst-cli
 
-I am assuming [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) has been installed.
-To install typst: 
+I am assuming [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) has been installed.  
+1. To install typst: 
 
 ```bash
 cargo install --locked typst-cli
 ```
+2. Check that it is installed correctly:
 
+```bash
+typst --version
+```
+
+Expected Output:
+```console {.no-copy}
+typst 0.13.1
+```
 From here you can use VSCode as the editor, I am using the [tinymist plugin](https://myriad-dreamin.github.io/tinymist/).
 
 To official typst app is [online only](https://typst.app/pricing/).
+
+## Quick Start 
+
 
 ## Notes
 
