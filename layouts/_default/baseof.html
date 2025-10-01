@@ -302,125 +302,344 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     {{ end }}
     
-    <!-- Syntax highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-r.min.js"></script>
+    <!-- Typst rendering styles -->
+    <link rel="stylesheet" href="/css/typst-render.css">
+
+    <!-- Blockquote styles -->
+    <link rel="stylesheet" href="/css/blockquote.css">
+
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/julia.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/toml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+
+    <!-- Custom Language Definitions -->
+    <script>
+        // Custom Typst language definition for Highlight.js
+        hljs.registerLanguage('typst', function(hljs) {
+            return {
+                name: 'Typst',
+                aliases: ['typ'],
+                case_insensitive: false,
+                contains: [
+                    // Line comments
+                    hljs.COMMENT('//', '$'),
+                    // Block comments
+                    hljs.COMMENT('/\\*', '\\*/', {
+                        contains: ['self']
+                    }),
+                    // Math mode
+                    {
+                        className: 'formula',
+                        begin: '\\$',
+                        end: '\\$',
+                        contains: [
+                            {
+                                className: 'subst',
+                                begin: '#',
+                                end: '(?=[\\s$])',
+                                keywords: 'none auto true false'
+                            }
+                        ],
+                        relevance: 10
+                    },
+                    // Code mode functions and identifiers
+                    {
+                        className: 'meta',
+                        begin: '#',
+                        end: '(?=[\\s\\[\\(\\{;,])',
+                        keywords: {
+                            keyword: 'set show let import include if else for while in break continue return',
+                            literal: 'none auto true false',
+                            built_in: 'text rect image block align box circle ellipse line path polygon grid table figure equation ' +
+                                     'heading list enum term par quote raw code link ref cite bibliography footnote outline ' +
+                                     'pagebreak colbreak v h stack columns place rotate scale move pad margin fill stroke ' +
+                                     'width height size font weight style spacing leading tracking baseline subscript superscript ' +
+                                     'underline overline strikethrough smallcaps upper lower'
+                        },
+                        contains: [
+                            {
+                                className: 'function',
+                                begin: '\\w+(?=\\()',
+                                relevance: 0
+                            }
+                        ],
+                        relevance: 10
+                    },
+                    // Strings
+                    {
+                        className: 'string',
+                        begin: '"',
+                        end: '"',
+                        contains: [
+                            hljs.BACKSLASH_ESCAPE,
+                            {
+                                className: 'subst',
+                                begin: '#',
+                                end: '(?=[\\s"])'
+                            }
+                        ]
+                    },
+                    // Numbers
+                    {
+                        className: 'number',
+                        variants: [
+                            { begin: '\\b\\d+(\\.\\d+)?(pt|mm|cm|in|em|%)\\b' },
+                            { begin: '\\b\\d+(\\.\\d+)?\\b' }
+                        ],
+                        relevance: 0
+                    },
+                    // Content blocks
+                    {
+                        className: 'section',
+                        begin: '\\[',
+                        end: '\\]',
+                        contains: ['self'],
+                        relevance: 0
+                    },
+                    // Code blocks
+                    {
+                        className: 'section',
+                        begin: '\\{',
+                        end: '\\}',
+                        contains: ['self'],
+                        relevance: 0
+                    },
+                    // Operators
+                    {
+                        className: 'operator',
+                        begin: '[+\\-*\\/=<>!&|]+'
+                    }
+                ]
+            };
+        });
+
+        // Custom Mermaid language definition for Highlight.js
+        hljs.registerLanguage('mermaid', function(hljs) {
+            return {
+                name: 'Mermaid',
+                case_insensitive: false,
+                contains: [
+                    // Comments
+                    hljs.COMMENT('%%', '$'),
+                    // Directives
+                    {
+                        className: 'meta',
+                        begin: '%%\\{',
+                        end: '\\}%%',
+                        relevance: 10
+                    },
+                    // Frontmatter
+                    {
+                        className: 'meta',
+                        begin: '^---$',
+                        end: '^---$',
+                        relevance: 10
+                    },
+                    // Diagram type declarations
+                    {
+                        className: 'keyword',
+                        begin: '^\\s*(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram|stateDiagram-v2|erDiagram|' +
+                               'journey|gantt|pie|quadrantChart|requirementDiagram|gitGraph|C4Context|C4Container|' +
+                               'C4Component|C4Dynamic|C4Deployment|mindmap|timeline|zenuml|sankey|xyChart|' +
+                               'block-beta|packet-beta|kanban|architecture|radar|treemap)\\b',
+                        relevance: 10
+                    },
+                    // Direction indicators
+                    {
+                        className: 'attribute',
+                        begin: '\\b(TB|TD|BT|RL|LR)\\b',
+                        relevance: 5
+                    },
+                    // Subgraph and end keywords
+                    {
+                        className: 'keyword',
+                        begin: '\\b(subgraph|end)\\b',
+                        relevance: 5
+                    },
+                    // Sequence diagram keywords
+                    {
+                        className: 'keyword',
+                        begin: '\\b(participant|actor|activate|deactivate|Note|note|loop|alt|else|opt|par|and|rect|' +
+                               'autonumber|over|right of|left of|box|end box)\\b',
+                        relevance: 5
+                    },
+                    // Class diagram keywords
+                    {
+                        className: 'keyword',
+                        begin: '\\b(class|namespace|direction|<<|>>)\\b',
+                        relevance: 5
+                    },
+                    // Arrows and connections
+                    {
+                        className: 'operator',
+                        begin: '(-->|->|---|-|==>|==|\\.-|\\.->>|->>|-->>|--x|--o|<-->|<->|o--|x--|\\|)',
+                        relevance: 5
+                    },
+                    // Node syntax with brackets/parens
+                    {
+                        className: 'string',
+                        variants: [
+                            { begin: '\\[', end: '\\]' },
+                            { begin: '\\(', end: '\\)' },
+                            { begin: '\\{', end: '\\}' },
+                            { begin: '\\(\\[', end: '\\]\\)' },
+                            { begin: '\\[\\[', end: '\\]\\]' },
+                            { begin: '\\[\\(', end: '\\)\\]' },
+                            { begin: '>\\[', end: '\\]' },
+                            { begin: '\\[/', end: '/\\]' },
+                            { begin: '\\[\\//', end: '//\\]' },
+                            { begin: '"', end: '"' }
+                        ],
+                        relevance: 5
+                    },
+                    // Node identifiers
+                    {
+                        className: 'variable',
+                        begin: '\\b[A-Za-z][A-Za-z0-9_]*\\b',
+                        relevance: 0
+                    },
+                    // Edge labels
+                    {
+                        className: 'string',
+                        begin: '\\|',
+                        end: '\\|',
+                        relevance: 5
+                    }
+                ]
+            };
+        });
+    </script>
+
     <style>
-        /* Code block styling */
-        pre[class*="language-"] {
+        /* Highlight.js code block styling */
+        pre code.hljs {
+            display: block;
+            overflow-x: auto;
+            padding: 1.5em;
             border-radius: 0.5rem;
             margin: 2rem 0;
-            background: #1e1e1e !important;
+            background: #282c34 !important;
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
             font-family: var(--font-mono) !important;
             font-size: 0.9em;
             letter-spacing: -0.01em;
+            line-height: 1.5;
         }
-        
-        code[class*="language-"] {
-            text-shadow: none;
-            font-family: var(--font-mono) !important;
+
+        /* Override default highlight.js theme colors for better contrast */
+        .hljs {
+            color: #abb2bf;
+            background: #282c34;
         }
-        
-        /* Token coloring - dark theme optimized */
-        .token.comment,
-        .token.prolog,
-        .token.doctype,
-        .token.cdata {
-            color: #608b4e;
+
+        .hljs-comment,
+        .hljs-quote {
+            color: #5c6370;
+            font-style: italic;
         }
-        
-        .token.punctuation {
-            color: #d4d4d4;
+
+        .hljs-doctag,
+        .hljs-keyword,
+        .hljs-formula {
+            color: #c678dd;
         }
-        
-        .token.namespace {
-            opacity: 0.7;
+
+        .hljs-section,
+        .hljs-name,
+        .hljs-selector-tag,
+        .hljs-deletion,
+        .hljs-subst {
+            color: #e06c75;
         }
-        
-        .token.property,
-        .token.tag,
-        .token.boolean,
-        .token.number,
-        .token.constant,
-        .token.symbol,
-        .token.deleted {
-            color: #b5cea8;
+
+        .hljs-literal {
+            color: #56b6c2;
         }
-        
-        .token.selector,
-        .token.attr-name,
-        .token.string,
-        .token.char,
-        .token.builtin,
-        .token.inserted {
-            color: #ce9178;
+
+        .hljs-string,
+        .hljs-regexp,
+        .hljs-addition,
+        .hljs-attribute,
+        .hljs-meta .hljs-string {
+            color: #98c379;
         }
-        
-        .token.operator,
-        .token.entity,
-        .token.url,
-        .language-css .token.string,
-        .style .token.string {
-            color: #d4d4d4;
+
+        .hljs-attr,
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-type,
+        .hljs-selector-class,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo,
+        .hljs-number {
+            color: #d19a66;
         }
-        
-        .token.atrule,
-        .token.attr-value,
-        .token.keyword {
-            color: #569CD6;
+
+        .hljs-symbol,
+        .hljs-bullet,
+        .hljs-link,
+        .hljs-meta,
+        .hljs-selector-id,
+        .hljs-title {
+            color: #61aeee;
         }
-        
-        .token.function,
-        .token.class-name {
-            color: #4EC9B0;
+
+        .hljs-built_in,
+        .hljs-title.class_,
+        .hljs-class .hljs-title {
+            color: #e6c07b;
         }
-        
-        .token.regex,
-        .token.important,
-        .token.variable {
-            color: #dcdcaa;
+
+        .hljs-emphasis {
+            font-style: italic;
         }
-        
-        /* Line numbers */
-        pre[class*="language-"].line-numbers {
-            position: relative;
-            padding-left: 3.8em;
-            counter-reset: linenumber;
+
+        .hljs-strong {
+            font-weight: bold;
         }
-        
-        .line-numbers .line-numbers-rows {
-            position: absolute;
-            pointer-events: none;
-            top: 0;
-            font-size: 100%;
-            left: -3.8em;
-            width: 3em;
-            letter-spacing: -1px;
-            border-right: 1px solid #404040;
+
+        .hljs-link {
+            text-decoration: underline;
+        }
+
+        /* Line number support for highlight.js (if needed later) */
+        .hljs-ln {
+            border-collapse: collapse;
+        }
+
+        .hljs-ln td {
+            padding: 0;
+        }
+
+        .hljs-ln-n {
+            width: 2.5em;
+            padding-right: 0.5em;
+            color: #5a5a5a;
+            text-align: right;
             user-select: none;
         }
-        
-        .line-numbers-rows > span {
-            display: block;
-            counter-increment: linenumber;
-        }
-        
-        .line-numbers-rows > span:before {
-            content: counter(linenumber);
-            color: #5a5a5a;
-            display: block;
-            padding-right: 0.8em;
-            text-align: right;
+
+        .hljs-ln-code {
+            padding-left: 1em;
         }
         
         /* List styles fix */
@@ -619,13 +838,14 @@
             padding: 0.05em 0.25em !important;
             margin: 0 -0.05em;
             border-radius: 0.2em;
+            font-weight: 600 !important;
             transition: all 0.15s ease;
             background-image: linear-gradient(
                 to bottom,
                 transparent 0%,
                 transparent 50%,
-                rgba(254, 240, 138, 0.7) 50%,
-                rgba(254, 240, 138, 0.7) 100%
+                rgba(255, 234, 0, 0.5) 50%,
+                rgba(255, 234, 0, 0.5) 100%
             ) !important;
         }
 
@@ -641,6 +861,66 @@
                 rgba(250, 204, 21, 1) 15%,
                 rgba(250, 204, 21, 1) 100%
             ) !important;
+        }
+    </style>
+
+    <!-- Copy button styles for code blocks -->
+    <style>
+        /* Container for code blocks with copy button */
+        .code-block-wrapper {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        /* Copy button styling */
+        .copy-code-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.375rem 0.5rem;
+            background: rgba(55, 65, 81, 0.8);
+            color: #9ca3af;
+            border: 1px solid #4b5563;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .copy-code-button:hover {
+            background: rgba(75, 85, 99, 0.9);
+            color: #e5e7eb;
+            border-color: #6b7280;
+            transform: translateY(-1px);
+        }
+
+        .copy-code-button:active {
+            transform: translateY(0);
+        }
+
+        .copy-code-button.copied {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border-color: #22c55e;
+        }
+
+        .copy-code-button i {
+            font-size: 0.875rem;
+        }
+
+        /* Ensure pre blocks are properly positioned */
+        pre {
+            position: relative;
+        }
+
+        /* Tighter padding for cleaner look */
+        pre code.hljs {
+            padding: 1em 1.5em !important;
         }
     </style>
 </head>
@@ -661,7 +941,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="container mx-auto px-4 py-10 max-w-3xl">
+    <main class="container mx-auto px-4 py-10 max-w-6xl">
         <div class="prose prose-lg dark:prose-invert prose-headings:roboto-flex-heading prose-h1:text-blue-300 prose-h2:text-blue-200 prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-a:no-underline prose-a:border-b prose-a:border-blue-400 hover:prose-a:border-blue-300 prose-a:pb-0.5 prose-a:transition-colors prose-pre:bg-gray-900 max-w-none">
             {{ block "main" . }}{{ end }}
         </div>
@@ -700,5 +980,168 @@
         });
     </script>
     {{ end }}
+
+    <!-- Mermaid.js for diagram rendering -->
+    {{ if .Page.Store.Get "hasMermaid" }}
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                themeVariables: {
+                    primaryColor: '#1e1e2e',
+                    primaryTextColor: '#cdd6f4',
+                    primaryBorderColor: '#89b4fa',
+                    lineColor: '#89b4fa',
+                    secondaryColor: '#313244',
+                    tertiaryColor: '#45475a',
+                    background: '#1e1e2e',
+                    mainBkg: '#1e1e2e',
+                    secondBkg: '#313244',
+                    tertiaryBkg: '#45475a',
+                    textColor: '#cdd6f4',
+                    edgeLabelBackground: '#313244'
+                }
+            });
+        });
+    </script>
+    {{ end }}
+
+    <!-- Initialize Highlight.js and Copy Button -->
+    <script>
+        // Function to copy text to clipboard
+        async function copyToClipboard(text, button) {
+            try {
+                await navigator.clipboard.writeText(text);
+
+                // Update button to show success
+                const originalHTML = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                // Fallback method for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    // Update button to show success
+                    const originalHTML = button.innerHTML;
+                    button.classList.add('copied');
+                    button.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+                    setTimeout(() => {
+                        button.classList.remove('copied');
+                        button.innerHTML = originalHTML;
+                    }, 2000);
+                } catch (err) {
+                    console.error('Fallback copy failed: ', err);
+                }
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // Function to add copy button to code blocks
+        function addCopyButton(block) {
+            // Don't add if button already exists
+            if (block.parentElement.querySelector('.copy-code-button')) {
+                return;
+            }
+
+            // Skip adding copy button only for explicitly marked no-copy blocks
+            // Check the code block and its parent elements for the no-copy class
+            const hasNoCopy = block.classList.contains('no-copy') ||
+                              block.parentElement?.classList.contains('no-copy') ||
+                              block.parentElement?.parentElement?.classList.contains('no-copy');
+
+            if (hasNoCopy) {
+                return; // No copy button for blocks marked with {.no-copy}
+            }
+
+            // Create wrapper if it doesn't exist
+            const pre = block.parentElement;
+            if (!pre.classList.contains('code-block-wrapper')) {
+                pre.classList.add('code-block-wrapper');
+            }
+
+            // Create copy button
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-code-button';
+            copyButton.innerHTML = '<i class="fa-solid fa-clipboard"></i>';
+            copyButton.title = 'Copy code';
+
+            // Add click handler
+            copyButton.addEventListener('click', function() {
+                let codeText = block.textContent || block.innerText;
+                copyToClipboard(codeText, copyButton);
+            });
+
+            // Add button to the pre element
+            pre.appendChild(copyButton);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configure highlight.js
+            hljs.configure({
+                languages: ['python', 'julia', 'bash', 'shell', 'powershell', 'sql', 'javascript', 'typescript', 'json', 'yaml', 'toml', 'dockerfile', 'go', 'rust', 'r', 'xml', 'css', 'html', 'typst', 'mermaid'],
+                ignoreUnescapedHTML: true
+            });
+
+            // Highlight all code blocks and add copy buttons
+            document.querySelectorAll('pre code').forEach((block) => {
+                // Skip Mermaid blocks - they should not be highlighted
+                if (block.parentElement.classList.contains('mermaid')) {
+                    return;
+                }
+                // Check if it's already processed, highlight if needed
+                if (!block.classList.contains('hljs')) {
+                    hljs.highlightElement(block);
+                }
+                // Add copy button to all code blocks (including pre-styled ones)
+                addCopyButton(block);
+            });
+
+            // Handle dynamically added content
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length) {
+                        mutation.addedNodes.forEach(function(node) {
+                            if (node.nodeType === 1) { // Element node
+                                const codeBlocks = node.querySelectorAll('pre code');
+                                codeBlocks.forEach(function(block) {
+                                    // Skip Mermaid blocks
+                                    if (block.parentElement.classList.contains('mermaid')) {
+                                        return;
+                                    }
+                                    // Highlight if needed
+                                    if (!block.classList.contains('hljs')) {
+                                        hljs.highlightElement(block);
+                                    }
+                                    // Add copy button to all dynamically added code blocks
+                                    addCopyButton(block);
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    </script>
 </body>
 </html>

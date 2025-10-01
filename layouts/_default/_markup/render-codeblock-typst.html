@@ -1,0 +1,41 @@
+{{ $id := printf "typst-%d" (hash.FNV32a .Inner) }}
+{{ $pageSlug := .Page.File.ContentBaseName }}
+
+{{ if in .Attributes.class "render" }}
+  {{/* Render only the output */}}
+  <div class="typst-render" id="{{ $id }}">
+    <div class="typst-output">
+      {{ $pngPath := printf "/rendered/typst/%s/%s.png" $pageSlug $id }}
+      {{ $pdfPath := printf "/rendered/typst/%s/%s.pdf" $pageSlug $id }}
+      {{ if fileExists (printf "static%s" $pngPath) }}
+        <img src="{{ $pngPath }}" alt="Typst output" loading="lazy">
+      {{ else if fileExists (printf "static%s" $pdfPath) }}
+        <embed src="{{ $pdfPath }}" type="application/pdf" width="100%" height="800px" />
+      {{ end }}
+      <div class="typst-placeholder">
+        <pre tabindex="0"><code class="language-typst" data-lang="typst">{{- .Inner -}}</code></pre>
+        <p class="typst-note">Note: Typst rendering requires compilation. Output will be generated during build.</p>
+      </div>
+    </div>
+  </div>
+  {{ .Page.Store.Set "hasTypst" true }}
+
+{{ else if in .Attributes.class "side-by-side" }}
+  {{/* Show code and output side by side */}}
+  <div class="typst-container side-by-side" id="{{ $id }}">
+    <div class="typst-code">
+      <pre tabindex="0"><code class="language-typst" data-lang="typst">{{- .Inner -}}</code></pre>
+    </div>
+    <div class="typst-output">
+      <img src="/rendered/typst/{{ $pageSlug }}/{{ $id }}.png" alt="Typst output" loading="lazy">
+      <div class="typst-placeholder">
+        <p class="typst-note">Note: Typst rendering requires compilation. Output will be generated during build.</p>
+      </div>
+    </div>
+  </div>
+  {{ .Page.Store.Set "hasTypst" true }}
+
+{{ else }}
+  {{/* Default: Show raw typst code with consistent unsupported language formatting */}}
+  <pre tabindex="0"><code class="language-typst" data-lang="typst">{{- .Inner -}}</code></pre>
+{{ end }}

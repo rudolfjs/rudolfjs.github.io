@@ -8,13 +8,14 @@ article.prose a {
   padding: 0.05em 0.25em !important;
   margin: 0 -0.05em;
   border-radius: 0.2em;
+  font-weight: 600 !important;
   transition: all 0.15s ease;
   background-image: linear-gradient(
     to bottom,
     transparent 0%,
     transparent 50%,
-    rgba(254, 240, 138, 0.7) 50%,
-    rgba(254, 240, 138, 0.7) 100%
+    rgba(255, 234, 0, 0.5) 50%,
+    rgba(255, 234, 0, 0.5) 100%
   ) !important;
   background-position: 0 0;
   background-size: 100% 100%;
