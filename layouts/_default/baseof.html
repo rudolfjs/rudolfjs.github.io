@@ -302,6 +302,12 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     {{ end }}
     
+    <!-- Typst rendering styles -->
+    <link rel="stylesheet" href="/css/typst-render.css">
+
+    <!-- Blockquote styles -->
+    <link rel="stylesheet" href="/css/blockquote.css">
+
     <!-- Highlight.js for syntax highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -324,6 +330,205 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+
+    <!-- Custom Language Definitions -->
+    <script>
+        // Custom Typst language definition for Highlight.js
+        hljs.registerLanguage('typst', function(hljs) {
+            return {
+                name: 'Typst',
+                aliases: ['typ'],
+                case_insensitive: false,
+                contains: [
+                    // Line comments
+                    hljs.COMMENT('//', '$'),
+                    // Block comments
+                    hljs.COMMENT('/\\*', '\\*/', {
+                        contains: ['self']
+                    }),
+                    // Math mode
+                    {
+                        className: 'formula',
+                        begin: '\\$',
+                        end: '\\$',
+                        contains: [
+                            {
+                                className: 'subst',
+                                begin: '#',
+                                end: '(?=[\\s$])',
+                                keywords: 'none auto true false'
+                            }
+                        ],
+                        relevance: 10
+                    },
+                    // Code mode functions and identifiers
+                    {
+                        className: 'meta',
+                        begin: '#',
+                        end: '(?=[\\s\\[\\(\\{;,])',
+                        keywords: {
+                            keyword: 'set show let import include if else for while in break continue return',
+                            literal: 'none auto true false',
+                            built_in: 'text rect image block align box circle ellipse line path polygon grid table figure equation ' +
+                                     'heading list enum term par quote raw code link ref cite bibliography footnote outline ' +
+                                     'pagebreak colbreak v h stack columns place rotate scale move pad margin fill stroke ' +
+                                     'width height size font weight style spacing leading tracking baseline subscript superscript ' +
+                                     'underline overline strikethrough smallcaps upper lower'
+                        },
+                        contains: [
+                            {
+                                className: 'function',
+                                begin: '\\w+(?=\\()',
+                                relevance: 0
+                            }
+                        ],
+                        relevance: 10
+                    },
+                    // Strings
+                    {
+                        className: 'string',
+                        begin: '"',
+                        end: '"',
+                        contains: [
+                            hljs.BACKSLASH_ESCAPE,
+                            {
+                                className: 'subst',
+                                begin: '#',
+                                end: '(?=[\\s"])'
+                            }
+                        ]
+                    },
+                    // Numbers
+                    {
+                        className: 'number',
+                        variants: [
+                            { begin: '\\b\\d+(\\.\\d+)?(pt|mm|cm|in|em|%)\\b' },
+                            { begin: '\\b\\d+(\\.\\d+)?\\b' }
+                        ],
+                        relevance: 0
+                    },
+                    // Content blocks
+                    {
+                        className: 'section',
+                        begin: '\\[',
+                        end: '\\]',
+                        contains: ['self'],
+                        relevance: 0
+                    },
+                    // Code blocks
+                    {
+                        className: 'section',
+                        begin: '\\{',
+                        end: '\\}',
+                        contains: ['self'],
+                        relevance: 0
+                    },
+                    // Operators
+                    {
+                        className: 'operator',
+                        begin: '[+\\-*\\/=<>!&|]+'
+                    }
+                ]
+            };
+        });
+
+        // Custom Mermaid language definition for Highlight.js
+        hljs.registerLanguage('mermaid', function(hljs) {
+            return {
+                name: 'Mermaid',
+                case_insensitive: false,
+                contains: [
+                    // Comments
+                    hljs.COMMENT('%%', '$'),
+                    // Directives
+                    {
+                        className: 'meta',
+                        begin: '%%\\{',
+                        end: '\\}%%',
+                        relevance: 10
+                    },
+                    // Frontmatter
+                    {
+                        className: 'meta',
+                        begin: '^---$',
+                        end: '^---$',
+                        relevance: 10
+                    },
+                    // Diagram type declarations
+                    {
+                        className: 'keyword',
+                        begin: '^\\s*(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram|stateDiagram-v2|erDiagram|' +
+                               'journey|gantt|pie|quadrantChart|requirementDiagram|gitGraph|C4Context|C4Container|' +
+                               'C4Component|C4Dynamic|C4Deployment|mindmap|timeline|zenuml|sankey|xyChart|' +
+                               'block-beta|packet-beta|kanban|architecture|radar|treemap)\\b',
+                        relevance: 10
+                    },
+                    // Direction indicators
+                    {
+                        className: 'attribute',
+                        begin: '\\b(TB|TD|BT|RL|LR)\\b',
+                        relevance: 5
+                    },
+                    // Subgraph and end keywords
+                    {
+                        className: 'keyword',
+                        begin: '\\b(subgraph|end)\\b',
+                        relevance: 5
+                    },
+                    // Sequence diagram keywords
+                    {
+                        className: 'keyword',
+                        begin: '\\b(participant|actor|activate|deactivate|Note|note|loop|alt|else|opt|par|and|rect|' +
+                               'autonumber|over|right of|left of|box|end box)\\b',
+                        relevance: 5
+                    },
+                    // Class diagram keywords
+                    {
+                        className: 'keyword',
+                        begin: '\\b(class|namespace|direction|<<|>>)\\b',
+                        relevance: 5
+                    },
+                    // Arrows and connections
+                    {
+                        className: 'operator',
+                        begin: '(-->|->|---|-|==>|==|\\.-|\\.->>|->>|-->>|--x|--o|<-->|<->|o--|x--|\\|)',
+                        relevance: 5
+                    },
+                    // Node syntax with brackets/parens
+                    {
+                        className: 'string',
+                        variants: [
+                            { begin: '\\[', end: '\\]' },
+                            { begin: '\\(', end: '\\)' },
+                            { begin: '\\{', end: '\\}' },
+                            { begin: '\\(\\[', end: '\\]\\)' },
+                            { begin: '\\[\\[', end: '\\]\\]' },
+                            { begin: '\\[\\(', end: '\\)\\]' },
+                            { begin: '>\\[', end: '\\]' },
+                            { begin: '\\[/', end: '/\\]' },
+                            { begin: '\\[\\//', end: '//\\]' },
+                            { begin: '"', end: '"' }
+                        ],
+                        relevance: 5
+                    },
+                    // Node identifiers
+                    {
+                        className: 'variable',
+                        begin: '\\b[A-Za-z][A-Za-z0-9_]*\\b',
+                        relevance: 0
+                    },
+                    // Edge labels
+                    {
+                        className: 'string',
+                        begin: '\\|',
+                        end: '\\|',
+                        relevance: 5
+                    }
+                ]
+            };
+        });
+    </script>
+
     <style>
         /* Highlight.js code block styling */
         pre code.hljs {
@@ -633,13 +838,14 @@
             padding: 0.05em 0.25em !important;
             margin: 0 -0.05em;
             border-radius: 0.2em;
+            font-weight: 600 !important;
             transition: all 0.15s ease;
             background-image: linear-gradient(
                 to bottom,
                 transparent 0%,
                 transparent 50%,
-                rgba(254, 240, 138, 0.7) 50%,
-                rgba(254, 240, 138, 0.7) 100%
+                rgba(255, 234, 0, 0.5) 50%,
+                rgba(255, 234, 0, 0.5) 100%
             ) !important;
         }
 
@@ -735,7 +941,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="container mx-auto px-4 py-10 max-w-3xl">
+    <main class="container mx-auto px-4 py-10 max-w-6xl">
         <div class="prose prose-lg dark:prose-invert prose-headings:roboto-flex-heading prose-h1:text-blue-300 prose-h2:text-blue-200 prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-a:no-underline prose-a:border-b prose-a:border-blue-400 hover:prose-a:border-blue-300 prose-a:pb-0.5 prose-a:transition-colors prose-pre:bg-gray-900 max-w-none">
             {{ block "main" . }}{{ end }}
         </div>
@@ -770,6 +976,33 @@
                     {left: "$$", right: "$$", display: true},
                     {left: "$", right: "$", display: false}
                 ]
+            });
+        });
+    </script>
+    {{ end }}
+
+    <!-- Mermaid.js for diagram rendering -->
+    {{ if .Page.Store.Get "hasMermaid" }}
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                themeVariables: {
+                    primaryColor: '#1e1e2e',
+                    primaryTextColor: '#cdd6f4',
+                    primaryBorderColor: '#89b4fa',
+                    lineColor: '#89b4fa',
+                    secondaryColor: '#313244',
+                    tertiaryColor: '#45475a',
+                    background: '#1e1e2e',
+                    mainBkg: '#1e1e2e',
+                    secondBkg: '#313244',
+                    tertiaryBkg: '#45475a',
+                    textColor: '#cdd6f4',
+                    edgeLabelBackground: '#313244'
+                }
             });
         });
     </script>
@@ -861,17 +1094,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Configure highlight.js
             hljs.configure({
-                languages: ['python', 'julia', 'bash', 'shell', 'powershell', 'sql', 'javascript', 'typescript', 'json', 'yaml', 'toml', 'dockerfile', 'go', 'rust', 'r', 'xml', 'css', 'html'],
+                languages: ['python', 'julia', 'bash', 'shell', 'powershell', 'sql', 'javascript', 'typescript', 'json', 'yaml', 'toml', 'dockerfile', 'go', 'rust', 'r', 'xml', 'css', 'html', 'typst', 'mermaid'],
                 ignoreUnescapedHTML: true
             });
 
             // Highlight all code blocks and add copy buttons
             document.querySelectorAll('pre code').forEach((block) => {
-                // Check if it's already processed
+                // Skip Mermaid blocks - they should not be highlighted
+                if (block.parentElement.classList.contains('mermaid')) {
+                    return;
+                }
+                // Check if it's already processed, highlight if needed
                 if (!block.classList.contains('hljs')) {
                     hljs.highlightElement(block);
                 }
-                // Add copy button
+                // Add copy button to all code blocks (including pre-styled ones)
                 addCopyButton(block);
             });
 
@@ -883,10 +1120,15 @@
                             if (node.nodeType === 1) { // Element node
                                 const codeBlocks = node.querySelectorAll('pre code');
                                 codeBlocks.forEach(function(block) {
+                                    // Skip Mermaid blocks
+                                    if (block.parentElement.classList.contains('mermaid')) {
+                                        return;
+                                    }
+                                    // Highlight if needed
                                     if (!block.classList.contains('hljs')) {
                                         hljs.highlightElement(block);
                                     }
-                                    // Add copy button to dynamically added code blocks
+                                    // Add copy button to all dynamically added code blocks
                                     addCopyButton(block);
                                 });
                             }

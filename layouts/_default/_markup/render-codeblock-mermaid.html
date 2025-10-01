@@ -1,4 +1,10 @@
-<pre class="mermaid">
-  {{- .Inner | safeHTML }}
-</pre>
-{{ .Page.Store.Set "hasMermaid" true }}
+{{ if in .Attributes.class "raw" }}
+  {{/* Show raw mermaid code with consistent unsupported language formatting */}}
+  <pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">{{- .Inner -}}</code></pre>
+{{ else }}
+  {{/* Render the mermaid diagram */}}
+  <pre class="mermaid">
+    {{- .Inner | safeHTML }}
+  </pre>
+  {{ .Page.Store.Set "hasMermaid" true }}
+{{ end }}

@@ -1,0 +1,64 @@
+/* Blockquote styling */
+blockquote {
+    margin: 1.5rem 0;
+    padding: 1.25rem 1.5rem;
+    /* Dark blue-gray gradient background matching typst render boxes */
+    background: linear-gradient(135deg, #334155 0%, #1e293b 100%) !important;
+    /* Pale yellow border matching hyperlink highlight - signals "important" */
+    border-left: 4px solid rgba(254, 240, 138, 0.7);
+    border-radius: 8px;
+    color: #f8fafc !important;
+    font-style: italic;
+    position: relative;
+}
+
+blockquote p {
+    margin: 0;
+    line-height: 1.7;
+    color: #f8fafc !important;
+}
+
+blockquote p:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+/* Nested blockquotes */
+blockquote blockquote {
+    margin: 1rem 0 0 0;
+    /* Lighter yellow for nested quotes */
+    border-left-color: rgba(254, 240, 138, 0.9);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    color: #f8fafc !important;
+}
+
+/* Code blocks inside blockquotes */
+blockquote code {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fbbf24;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-style: normal;
+}
+
+blockquote pre {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-style: normal;
+}
+
+/* Links inside blockquotes */
+blockquote a {
+    color: #60a5fa;
+    text-decoration: underline;
+}
+
+blockquote a:hover {
+    color: #93c5fd;
+}
+
+/* Strong/bold text in blockquotes */
+blockquote strong {
+    color: #f1f5f9;
+    font-style: normal;
+}
+
