@@ -32,6 +32,8 @@ node_modules/
 
 # Typst / LaTeX
 *.pdf
+# Allow rendered Typst outputs in content
+!content/**/*.pdf
 *.aux
 *.log
 *.out
