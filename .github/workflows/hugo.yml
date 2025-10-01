@@ -44,17 +44,6 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Dart Sass
         run: sudo snap install dart-sass
-      - name: Install Rust and Typst
-        run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-          source "$HOME/.cargo/env"
-          cargo install --locked typst-cli
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-      - name: Render Typst code blocks
-        run: |
-          if [ -f scripts/render-typst.sh ]; then
-            bash scripts/render-typst.sh
-          fi
       - name: Build with Hugo (panic on warnings)
         env:
           HUGO_ENVIRONMENT: production
@@ -73,12 +62,6 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Dart Sass
         run: sudo snap install dart-sass
-      - name: Install Rust and Typst
-        run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-          source "$HOME/.cargo/env"
-          cargo install --locked typst-cli
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -89,11 +72,6 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Render Typst code blocks
-        run: |
-          if [ -f scripts/render-typst.sh ]; then
-            bash scripts/render-typst.sh
-          fi
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache

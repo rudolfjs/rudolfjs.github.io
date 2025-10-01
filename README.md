@@ -49,7 +49,11 @@ Control how code blocks are displayed vs rendered using attributes:
 
 #### Rendering Typst Outputs
 
-To generate PNG images for Typst code blocks marked with `{.render}` or `{.side-by-side}`:
+**IMPORTANT: Typst rendering MUST be done locally before pushing to GitHub.**
+
+GitHub Actions does NOT render Typst files. You must generate and commit the PNG outputs locally.
+
+To generate PNG/PDF files for Typst code blocks marked with `{.render}` or `{.side-by-side}`:
 
 ```bash
 bash scripts/render-typst.sh
@@ -57,9 +61,9 @@ bash scripts/render-typst.sh
 
 This script will:
 - Scan all markdown files for Typst code blocks that need rendering
-- Compile them using the Typst CLI to PNG images
-- Save outputs to `static/rendered/typst/{page-slug}/typst-{hash}.png`
-- Cache previously rendered images (won't re-render if unchanged)
+- Compile them using the Typst CLI to PNG or PDF files (PDF for multi-page documents)
+- Save outputs to `static/rendered/typst/{page-slug}/typst-{hash}.png` or `.pdf`
+- Cache previously rendered files (won't re-render if unchanged)
 
 ## Content Publishing Workflow
 
@@ -71,7 +75,7 @@ This script will:
    # Edit the file, add Typst code blocks with {.render} or {.side-by-side}
    ```
 
-2. **Generate Typst PNG outputs:**
+2. **Generate Typst PNG/PDF outputs:**
    ```bash
    bash scripts/render-typst.sh
    ```
@@ -97,7 +101,8 @@ This script will:
 3. Commit and push
 
 ### Important Notes:
-- **Always commit the generated PNG files** - They must be in the repository for GitHub Pages to serve them
+- **REQUIRED: Render Typst locally before pushing** - GitHub Actions does NOT have Typst installed
+- **Always commit the generated PNG/PDF files** - They must be in the repository for GitHub Pages to serve them
 - The render script uses caching - only re-renders changed content
 - Raw Typst code blocks (` ```typst `) don't need the script, they just show syntax-highlighted code
 - Mermaid diagrams work without scripts (rendered client-side)
