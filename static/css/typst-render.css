@@ -127,6 +127,50 @@
     display: none;
 }
 
+/* PDF fallback for browsers that can't embed PDFs */
+.pdf-fallback {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #cdd6f4;
+    background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+    border-radius: 8px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-fallback p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #bac2de;
+}
+
+.pdf-download-btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #89b4fa;
+    color: #1e1e2e;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.pdf-download-btn:hover {
+    background: #74c7ec;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.4);
+}
+
+.pdf-download-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
 /* Mobile responsive design */
 @media (max-width: 768px) {
     .typst-container.side-by-side {

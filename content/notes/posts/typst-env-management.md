@@ -2,13 +2,13 @@
 title: "Typst Environment Management and Quick Start"
 date: 2025-09-29T11:11:08+10:00
 lastmod: 2025-09-29T11:11:08+10:00
-description: "Creating Typst workspace on Linux"
+description: "Creating a Typst workspace using cargo and exploring basic funtionality"
 categories: ["technical-notes"]
 tags: ["typst", "environment", "academic-writing"]
 draft: false
 ---
 
-_I have only started using Typst in my toolchain, traditionally I use LaTeX for academic writing. Currently, this note serves as a "quick start" and where Typst fits in my documentation workflow._
+_I have only started using Typst, traditionally I use LaTeX for academic writing. Currently, this note serves as a "quick start" and where Typst fits in my documentation workflow._
 
 ## Documentation Hierarchy
 
@@ -60,7 +60,7 @@ From here you can use VSCode as the editor, I am using the [tinymist plugin](htt
 
 To official typst app is [online only](https://typst.app/pricing/).
 
-## Basics
+# Typst basics
 
 _I am setting all the typst output with page width 10cm and diffent heights to display nicely within this page._
 
