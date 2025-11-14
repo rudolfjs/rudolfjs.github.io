@@ -1,0 +1,52 @@
+{{ define "main" }}
+  <div class="max-w-6xl mx-auto">
+    <!-- Publications Page Header -->
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Publications</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400">Research publications in digital health, machine learning, and clinical informatics</p>
+    </div>
+
+    <!-- Publications sorted by year and month -->
+    {{ $monthMap := dict "January" 1 "February" 2 "March" 3 "April" 4 "May" 5 "June" 6 "July" 7 "August" 8 "September" 9 "October" 10 "November" 11 "December" 12 }}
+
+    <!-- Create a scratch variable to store pages with sortable date -->
+    {{ $sortedPages := slice }}
+    {{ range .Pages }}
+      {{ $monthNum := 0 }}
+      {{ if .Params.month }}
+        {{ $monthNum = index $monthMap .Params.month }}
+      {{ end }}
+      <!-- Create a sortable value: year * 100 + month (e.g., 202511 for November 2025) -->
+      {{ $sortValue := add (mul .Params.year 100) $monthNum }}
+      {{ $sortedPages = $sortedPages | append (dict "page" . "sortValue" $sortValue) }}
+    {{ end }}
+
+    <!-- Sort by sortValue in descending order -->
+    {{ $sortedPages = sort $sortedPages "sortValue" "desc" }}
+
+    {{ $currentYear := 0 }}
+
+    {{ range $sortedPages }}
+      {{ $page := .page }}
+      {{ if ne $page.Params.year $currentYear }}
+        {{ $currentYear = $page.Params.year }}
+        <!-- Large Year Header -->
+        <div class="year-section mb-8 mt-16 first:mt-0">
+          <h2 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700">
+            {{ $page.Params.year }}
+          </h2>
+        </div>
+      {{ end }}
+
+      <!-- Publication Card -->
+      {{ partial "publication-card.html" $page }}
+    {{ end }}
+
+    <!-- If no publications -->
+    {{ if not $sortedPages }}
+      <div class="text-center py-12">
+        <p class="text-gray-500 dark:text-gray-400">No publications available yet.</p>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}
