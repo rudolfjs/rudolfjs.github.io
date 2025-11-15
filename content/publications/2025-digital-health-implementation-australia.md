@@ -1,5 +1,6 @@
 ---
 title: "Development and implementation of digital solutions in healthcare: insights from the Australian tertiary hospital landscape"
+date: 2025-04-14
 authors:
   - "Rudolf J. Schnetler"
   - "Venkat N. Vangaveti"

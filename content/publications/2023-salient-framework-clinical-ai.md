@@ -1,6 +1,7 @@
 ---
 title: "Implementation frameworks for end-to-end clinical AI:
 derivation of the SALIENT framework"
+date: 2023-05-19
 authors:
   - "Anton H. van der Vegt"
   - "Ian A. Scott"

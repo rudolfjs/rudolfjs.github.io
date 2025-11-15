@@ -2,6 +2,7 @@
 title: "Deployment of machine learning algorithms to predict
 sepsis: systematic review and application of the SALIENT
 clinical AI implementation framework"
+date: 2023-05-12
 authors:
   - "Anton H. van der Vegt"
   - "Ian A. Scott"

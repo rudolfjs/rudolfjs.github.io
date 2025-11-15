@@ -1,5 +1,6 @@
 ---
 title: "False hope of a single generalisable AI sepsis prediction model: bias and proposed mitigation strategies for improving performance based on a retrospective multisite cohort study"
+date: 2025-03-01
 authors:
   - "Rudolf J. Schnetler"
   - "Anton H. van der Vegt"

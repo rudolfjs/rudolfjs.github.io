@@ -1,5 +1,6 @@
 ---
 title: "Proposing a novel Seriously Deteriorated Patient Indicator (SDPI) for hospitalised ward patients"
+date: 2025-07-10
 authors: 
   - "Anton H. van der Vegt"
   - "Victoria Campbell"

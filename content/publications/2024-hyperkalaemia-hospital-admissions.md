@@ -1,5 +1,6 @@
 ---
 title: "Hyperkalaemia among hospital admissions: prevalence, risk factors, treatment and impact on length of stay"
+date: 2024-12-18
 authors:
   - "Yalin Yu"
   - "Venkat N. Vangaveti"
