@@ -4,6 +4,12 @@ on:
   # Auto-deploy on pushes to main
   push:
     branches: [main]
+    paths:
+      - 'content/**'
+      - 'static/**'
+      - 'data/**'
+      - 'i18n/**'
+      - 'hugo.toml'
   # Manual trigger
   workflow_dispatch:
 
