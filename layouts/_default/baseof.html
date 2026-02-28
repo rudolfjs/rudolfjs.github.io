@@ -829,9 +829,9 @@
     <!-- Highlighter effect for links -->
     <style>
         /* Highlighter effect for content links */
-        .content a:not(.group):not([class*="hover"]),
-        .prose a:not(.group):not([class*="hover"]),
-        article.prose a:not(.group):not([class*="hover"]) {
+        .content a:not(.group):not([class*="hover"]):not(.pdf-download-btn),
+        .prose a:not(.group):not([class*="hover"]):not(.pdf-download-btn),
+        article.prose a:not(.group):not([class*="hover"]):not(.pdf-download-btn) {
             position: relative;
             text-decoration: none !important;
             border-bottom: none !important;
@@ -849,9 +849,9 @@
             ) !important;
         }
 
-        .content a:not(.group):not([class*="hover"]):hover,
-        .prose a:not(.group):not([class*="hover"]):hover,
-        article.prose a:not(.group):not([class*="hover"]):hover {
+        .content a:not(.group):not([class*="hover"]):not(.pdf-download-btn):hover,
+        .prose a:not(.group):not([class*="hover"]):not(.pdf-download-btn):hover,
+        article.prose a:not(.group):not([class*="hover"]):not(.pdf-download-btn):hover {
             color: #1f2937 !important;
             font-weight: 700 !important;
             background-image: linear-gradient(

@@ -171,6 +171,48 @@
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
+/* Mobile PDF fallback — hidden by default, shown on mobile */
+.pdf-mobile-fallback {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #cdd6f4;
+    background: #45475a;
+    border-radius: 8px;
+    min-height: 200px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-mobile-fallback p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #bac2de;
+}
+
+/* Mobile-specific button — flat and subtle, distinct from the desktop download button */
+.pdf-mobile-fallback .pdf-download-btn {
+    background: #585b70;       /* slightly lighter than container #45475a */
+    color: #cdd6f4;            /* light text matching the container's text */
+    border-radius: 4px;        /* flat rectangle, minimal rounding */
+    box-shadow: none;          /* no shadow — flat */
+    font-weight: 500;          /* slightly lighter weight */
+    padding: 0.6rem 1.5rem;    /* slightly tighter */
+}
+
+.pdf-mobile-fallback .pdf-download-btn:hover {
+    background: #6c7086;
+    transform: none;
+    box-shadow: none;
+}
+
+.pdf-mobile-fallback .pdf-download-btn:active {
+    transform: none;
+    box-shadow: none;
+    background: #505264;
+}
+
 /* Mobile responsive design */
 @media (max-width: 768px) {
     .typst-container.side-by-side {
@@ -188,6 +230,15 @@
     /* Render appears second (bottom) */
     .typst-output {
         order: 2;
+    }
+
+    /* Swap PDF object for mobile fallback */
+    .pdf-desktop {
+        display: none;
+    }
+
+    .pdf-mobile-fallback {
+        display: flex;
     }
 }
 
