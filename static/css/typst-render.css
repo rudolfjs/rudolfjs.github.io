@@ -191,6 +191,28 @@
     color: #bac2de;
 }
 
+/* Mobile-specific button — flat and subtle, distinct from the desktop download button */
+.pdf-mobile-fallback .pdf-download-btn {
+    background: #585b70;       /* slightly lighter than container #45475a */
+    color: #cdd6f4;            /* light text matching the container's text */
+    border-radius: 4px;        /* flat rectangle, minimal rounding */
+    box-shadow: none;          /* no shadow — flat */
+    font-weight: 500;          /* slightly lighter weight */
+    padding: 0.6rem 1.5rem;    /* slightly tighter */
+}
+
+.pdf-mobile-fallback .pdf-download-btn:hover {
+    background: #6c7086;
+    transform: none;
+    box-shadow: none;
+}
+
+.pdf-mobile-fallback .pdf-download-btn:active {
+    transform: none;
+    box-shadow: none;
+    background: #505264;
+}
+
 /* Mobile responsive design */
 @media (max-width: 768px) {
     .typst-container.side-by-side {
