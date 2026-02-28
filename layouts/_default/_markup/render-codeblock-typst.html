@@ -10,7 +10,7 @@
       {{ if fileExists (printf "static%s" $pngPath) }}
         <img src="{{ $pngPath }}" alt="Typst output" loading="lazy">
       {{ else if fileExists (printf "static%s" $pdfPath) }}
-        <object data="{{ $pdfPath }}" type="application/pdf" width="100%" height="800px">
+        <object data="{{ $pdfPath }}" type="application/pdf" width="100%" height="800px" class="pdf-desktop">
           <div class="pdf-fallback">
             <p>PDF preview unavailable on this device.</p>
             <a href="{{ $pdfPath }}" class="pdf-download-btn" download aria-label="Download PDF document">
@@ -18,6 +18,12 @@
             </a>
           </div>
         </object>
+        <div class="pdf-mobile-fallback">
+          <p>PDF preview is best viewed on desktop.</p>
+          <a href="{{ $pdfPath }}" class="pdf-download-btn" download aria-label="Download PDF document">
+            📄 Download PDF
+          </a>
+        </div>
       {{ end }}
       <div class="typst-placeholder">
         <pre tabindex="0"><code class="language-typst" data-lang="typst">{{- .Inner -}}</code></pre>
