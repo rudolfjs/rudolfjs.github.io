@@ -1,0 +1,64 @@
+{{ define "main" }}
+<article class="max-w-6xl mx-auto">
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-3 text-gray-900 dark:text-gray-100">{{ .Title }}</h1>
+        {{ with .Params.subtitle }}
+          <p class="text-xl text-gray-600 dark:text-gray-400 mb-4">{{ . }}</p>
+        {{ end }}
+        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+            {{ with .Params.event }}
+              <span class="flex items-center">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                {{ . }}
+              </span>
+            {{ end }}
+            {{ with .Params.venue }}
+              <span class="flex items-center">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {{ . }}
+              </span>
+            {{ end }}
+            <time class="flex items-center">
+              <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {{ with .Params.event_date }}{{ time.Format "2 January 2006" . }}{{ else }}{{ .Date.Format "2 January 2006" }}{{ end }}
+            </time>
+        </div>
+        {{ with .Params.tags }}
+          <div class="mt-4 flex flex-wrap gap-2">
+            {{ range . }}
+              <span class="tag">#{{ . }}</span>
+            {{ end }}
+          </div>
+        {{ end }}
+    </header>
+
+    {{ with .Content }}
+      <div class="prose dark:prose-invert max-w-none mb-8">
+        {{ . }}
+      </div>
+    {{ end }}
+
+    {{ with .Params.presentation_url }}
+      <div class="mb-8">
+        <a href="{{ . }}" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          View Presentation
+        </a>
+      </div>
+
+      <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+        <iframe src="{{ . }}" class="w-full" style="aspect-ratio: 16/9;" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+    {{ end }}
+</article>
+{{ end }}
