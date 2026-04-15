@@ -2,6 +2,14 @@
 
 Rudolf J profile hosted using GitHub Pages.
 
+> **Staging repo** — This repository is the *staging* (source) repo for the personal website.
+> The built site is deployed to [`rudolfjs.github.io`](https://github.com/rudolfjs/rudolfjs.github.io).
+>
+> To set up the deployment remote:
+> ```bash
+> git remote add upstream git@github.com:rudolfjs/rudolfjs.github.io.git
+> ```
+
 ## Development
 
 Install `hugo` locally:
