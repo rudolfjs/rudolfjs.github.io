@@ -46,3 +46,5 @@ node_modules/
 .pixi/*
 !.pixi/config.toml
 .typst-temp-*
+
+.air
