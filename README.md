@@ -73,6 +73,11 @@ This script will:
 - Save outputs to `static/rendered/typst/{page-slug}/typst-{hash}.png` or `.pdf`
 - Cache previously rendered files (won't re-render if unchanged)
 
+**Image inputs:** Images referenced from Typst code with bare relative paths
+(e.g. `image("tree.jpg")`) live in `assets/typst/`. The render script copies them
+into its temp compile dir by basename so those paths resolve. Put any new Typst
+image inputs there. (`references.bib` is still read from the project root.)
+
 ## Content Publishing Workflow
 
 ### For posts with Typst rendering:
