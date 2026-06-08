@@ -2,6 +2,14 @@
 
 Rudolf J profile hosted using GitHub Pages.
 
+> **Staging repo** — This repository is the *staging* (source) repo for the personal website.
+> The built site is deployed to [`rudolfjs.github.io`](https://github.com/rudolfjs/rudolfjs.github.io).
+>
+> To set up the deployment remote:
+> ```bash
+> git remote add upstream git@github.com:rudolfjs/rudolfjs.github.io.git
+> ```
+
 ## Development
 
 Install `hugo` locally:
@@ -64,6 +72,11 @@ This script will:
 - Compile them using the Typst CLI to PNG or PDF files (PDF for multi-page documents)
 - Save outputs to `static/rendered/typst/{page-slug}/typst-{hash}.png` or `.pdf`
 - Cache previously rendered files (won't re-render if unchanged)
+
+**Image inputs:** Images referenced from Typst code with bare relative paths
+(e.g. `image("tree.jpg")`) live in `assets/typst/`. The render script copies them
+into its temp compile dir by basename so those paths resolve. Put any new Typst
+image inputs there. (`references.bib` is still read from the project root.)
 
 ## Content Publishing Workflow
 

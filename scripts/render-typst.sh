@@ -14,6 +14,10 @@ NC='\033[0m' # No Color
 # Configuration
 CONTENT_DIR="${1:-content}"
 OUTPUT_DIR="${2:-static/rendered/typst}"
+# Directory holding image/asset inputs referenced by Typst code blocks
+# (e.g. image("tree.jpg")). Files are copied into the temp compile dir by
+# basename so bare relative paths in the Typst source still resolve.
+TYPST_ASSETS_DIR="${3:-assets/typst}"
 TEMP_DIR=".typst-temp-$$"
 
 # Create temp directory
@@ -95,11 +99,16 @@ find "$CONTENT_DIR" -name "*.md" -type f | while read -r file; do
                     # Compile Typst to PNG
                     echo "  Compiling: ${hash_name}.typ -> ${hash_name}.png"
 
-                    # Copy any referenced assets from project root to temp dir
-                    # This allows relative paths in Typst code to work
-                    for ext in png jpg jpeg bib svg; do
-                        for asset in *."$ext"; do
-                            [ -f "$asset" ] && cp "$asset" "$TEMP_DIR/" 2>/dev/null || true
+                    # Copy any referenced assets into the temp dir so relative
+                    # paths in Typst code (e.g. image("tree.jpg")) resolve.
+                    # Sources: the dedicated Typst assets dir, plus the project
+                    # root (e.g. references.bib). Files are copied by basename.
+                    for assets_src in "$TYPST_ASSETS_DIR" .; do
+                        [ -d "$assets_src" ] || continue
+                        for ext in png jpg jpeg bib svg; do
+                            for asset in "$assets_src"/*."$ext"; do
+                                [ -f "$asset" ] && cp "$asset" "$TEMP_DIR/" 2>/dev/null || true
+                            done
                         done
                     done
 
