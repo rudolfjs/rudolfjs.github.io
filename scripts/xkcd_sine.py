@@ -22,7 +22,9 @@ SINE_FORMULA = r"$sin(x) = \sum_{n=0}^\infty\frac{(-1)^n}{(2n+1)!}x^{2n+1}$"
 # Output into the Typst assets dir consumed by scripts/render-typst.sh.
 # Run from the project root: python3 scripts/xkcd_sine.py
 def sine_is_life(output_path='assets/typst/sine_is_life.png'):
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    output_dir = os.path.dirname(output_path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     fig, ax = plt.subplots(figsize=(12,6))
     fig.suptitle(f"THE FUNCTION OF LIFE: {SINE_FORMULA}")
 

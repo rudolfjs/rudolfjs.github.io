@@ -14,7 +14,7 @@ authors:
   - "Guido Zuccon"
   - "Anton H van der Vegt"
 year: 2026
-month: "June"
+month: "May"
 journal: "MetaArXiv"
 doi: "10.31222/osf.io/xn2wp_v1"
 publication_type: "preprint"
