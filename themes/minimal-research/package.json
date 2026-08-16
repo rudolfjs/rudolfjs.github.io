@@ -25,7 +25,7 @@
     "lodash.castarray": "^4.4.0",
     "lodash.isplainobject": "^4.0.6",
     "lodash.merge": "^4.6.2",
-    "nanoid": "^3.3.17",
+    "nanoid": "^3.3.18",
     "node-releases": "^2.0.19",
     "normalize-range": "^0.1.2",
     "picocolors": "^1.1.1",
