@@ -10,6 +10,22 @@ Rudolf J profile hosted using GitHub Pages.
 > git remote add upstream git@github.com:rudolfjs/rudolfjs.github.io.git
 > ```
 
+## Maintenance mode
+
+The live site is currently a static holding page (`maintenance/index.html`),
+deployed by `.github/workflows/maintenance-pages.yml`, while the site is rebuilt
+on Astro. GitHub Pages serves whichever deployment ran last, so:
+
+- **Update the holding page** — edit `maintenance/index.html` and push to `main`;
+  the workflow redeploys it automatically. Check it locally with
+  `npm run test:maintenance` and `python3 -m http.server -d maintenance`.
+- **Bring the Hugo site back temporarily** — run *Platform release to Pages*
+  from the Actions tab. Its automatic `release` trigger, and the content
+  workflow's `push` trigger, are switched off until the migration lands.
+- **Finish the migration** — delete `maintenance/`, `maintenance-pages.yml`,
+  `tests/maintenance/` and the two Hugo workflows, then add the Astro deploy
+  workflow.
+
 ## Development
 
 Install `hugo` locally:

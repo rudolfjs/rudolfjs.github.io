@@ -1,17 +1,29 @@
-name: Deploy content to Pages
+# Deploys the static "down for maintenance" holding page in maintenance/ to
+# GitHub Pages.
+#
+# GitHub Pages serves whichever deployment happened most recently, so running
+# this workflow replaces the Hugo site with the holding page. To put the Hugo
+# site back, run "Platform release to Pages" by hand from the Actions tab.
+name: Maintenance page to Pages
 
 on:
-  # MAINTENANCE MODE: automatic deploys are switched off while the site is
-  # being rebuilt (see maintenance-pages.yml). Run this workflow by hand from
-  # the Actions tab to publish the Hugo site again.
+  # Deploys automatically when the holding page (or this workflow) changes on main
+  push:
+    branches: [main]
+    paths:
+      - 'maintenance/**'
+      - '.github/workflows/maintenance-pages.yml'
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
   deployments: write
 
+# Same group as the site workflows so two deploys never race
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -23,39 +35,15 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.145.0
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Build with Hugo
-        env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-          HUGO_ENVIRONMENT: production
-          TZ: America/Los_Angeles
-        run: |
-          hugo \
-            --gc \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Serve the holding page for unknown paths too
+        run: cp maintenance/index.html maintenance/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./maintenance
           retention-days: 1
 
   deploy:
