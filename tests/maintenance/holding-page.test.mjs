@@ -6,9 +6,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = resolve(import.meta.dirname, '..', '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const read = (p) => readFileSync(resolve(root, p), 'utf8');
 
 const PAGE = 'maintenance/index.html';
@@ -43,6 +44,7 @@ test('holding page keeps the profile links visitors came for', () => {
     'https://orcid.org/0000-0001-5129-5601',
     'https://github.com/rudolfjs',
     'https://www.linkedin.com/in/rudolfj/',
+    'https://bsky.app/profile/rudolfj.bsky.social',
     'mailto:r.schnetler@uq.edu.au',
   ]) {
     assert.ok(html.includes(`href="${href}`), `missing link to ${href}`);
@@ -53,6 +55,7 @@ test('maintenance workflow deploys the maintenance/ folder to Pages', () => {
   assert.ok(existsSync(resolve(root, WORKFLOW)), `${WORKFLOW} is missing`);
   const yml = read(WORKFLOW);
   assert.match(yml, /^\s+workflow_dispatch:/m, 'must be runnable by hand');
+  assert.match(yml, /uses:\s*actions\/configure-pages@v\d+/);
   assert.match(yml, /uses:\s*actions\/upload-pages-artifact@v\d+/);
   assert.match(yml, /path:\s*\.?\/?maintenance\b/);
   assert.match(yml, /uses:\s*actions\/deploy-pages@v\d+/);

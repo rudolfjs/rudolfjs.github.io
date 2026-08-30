@@ -22,9 +22,9 @@ on Astro. GitHub Pages serves whichever deployment ran last, so:
 - **Bring the Hugo site back temporarily** — run *Platform release to Pages*
   from the Actions tab. Its automatic `release` trigger, and the content
   workflow's `push` trigger, are switched off until the migration lands.
-- **Finish the migration** — delete `maintenance/`, `maintenance-pages.yml`,
-  `tests/maintenance/` and the two Hugo workflows, then add the Astro deploy
-  workflow.
+- **Finish the migration** — delete `maintenance/`,
+  `.github/workflows/maintenance-pages.yml`, `tests/maintenance/` and the two
+  Hugo workflows, then add the Astro deploy workflow.
 
 ## Development
 

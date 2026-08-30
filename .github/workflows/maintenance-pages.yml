@@ -38,6 +38,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
       - name: Serve the holding page for unknown paths too
         run: cp maintenance/index.html maintenance/404.html
       - name: Upload artifact
