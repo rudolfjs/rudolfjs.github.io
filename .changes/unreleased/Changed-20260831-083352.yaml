@@ -1,0 +1,3 @@
+kind: Changed
+body: Live site replaced by a static 'down for maintenance' holding page (maintenance/) while the site is rebuilt on Astro; Hugo deploy workflows are manual-only (workflow_dispatch) until the migration lands
+time: 2026-08-31T08:33:52.163982+10:00
