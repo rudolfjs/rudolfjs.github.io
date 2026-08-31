@@ -15,7 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   /* Plain node:test files live here (see package.json test:maintenance) */
-  testIgnore: 'tests/maintenance/**',
+  testIgnore: '**/tests/maintenance/**',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
