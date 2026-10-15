@@ -1,137 +1,80 @@
-# rudolfj.github.io
+# rudolfjs.github.io
 
-Rudolf J profile hosted using GitHub Pages.
-
-> **Staging repo** — This repository is the *staging* (source) repo for the personal website.
-> The built site is deployed to [`rudolfjs.github.io`](https://github.com/rudolfjs/rudolfjs.github.io).
->
-> To set up the deployment remote:
-> ```bash
-> git remote add upstream git@github.com:rudolfjs/rudolfjs.github.io.git
-> ```
+Rudolf J profile hosted using GitHub Pages at <https://rudolfjs.id.au>.
 
 ## Maintenance mode
 
-The live site is currently a static holding page (`maintenance/index.html`),
-deployed by `.github/workflows/maintenance-pages.yml`, while the site is rebuilt
-on Astro. GitHub Pages serves whichever deployment ran last, so:
+The site is currently a single "down for maintenance" holding page built with
+[Astro](https://astro.build) and TypeScript, while the full site is rebuilt on
+Astro. The page is rendered as both `/` and `/404.html`, so every old URL
+lands on it.
 
-- **Update the holding page** — edit `maintenance/index.html` and push to `main`;
-  the workflow redeploys it automatically. Check it locally with
-  `npm run test:maintenance` and `python3 -m http.server -d maintenance`.
-- **Bring the Hugo site back temporarily** — run *Platform release to Pages*
-  from the Actions tab. Its automatic `release` trigger, and the content
-  workflow's `push` trigger, are switched off until the migration lands.
-- **Finish the migration** — delete `maintenance/`,
-  `.github/workflows/maintenance-pages.yml`, `tests/maintenance/` and the two
-  Hugo workflows, then add the Astro deploy workflow.
+The previous Hugo site (content, theme, Typst renders, presentations) was
+removed from `main`. It is preserved at the `v3.5.0` tag:
+
+```bash
+git checkout v3.5.0 -- content/   # e.g. to bring the Markdown content back
+```
+
+## Layout
+
+| Path | Purpose |
+| --- | --- |
+| `src/components/HoldingPage.astro` | The holding page (markup + inlined CSS) |
+| `src/data/profile.ts` | Profile links shown on the page |
+| `src/pages/index.astro`, `src/pages/404.astro` | Routes; both render the holding page |
+| `public/` | Static files copied as-is (favicon) |
+| `tests/site.test.ts` | Contract tests for `dist/` and the workflows (`node:test`) |
+| `.husky/pre-push` | Local CVE checks + verify before every push |
+| `.github/workflows/site.yml` | CI/CD: CVE scan, build, test, deploy to Pages |
 
 ## Development
 
-Install `hugo` locally:
-
-_Assuming Fedora Linux Version: 42, for other platforms please see [Installation](https://gohugo.io/installation/linux/)._
-
-```bash
-sudo dnf install hugo
-```
-
-To run the server locally:
+Requires Node.js 22.18+ (the tests use Node's built-in TypeScript type
+stripping). CI uses the version in `.nvmrc`.
 
 ```bash
-hugo server -D --disableFastRender
+npm install        # also installs the Husky git hooks
+npm run dev        # http://localhost:4321
+npm run verify     # astro check + build + tests
+npm run preview    # serve dist/
 ```
 
-## Creating Content
+## Security checks
 
-Use `hugo new` with the available archetypes to create new content:
+`npm run security` runs:
 
-### Blog Posts
+1. `npm audit --audit-level=low` (GitHub Advisory Database, the same data
+   Dependabot uses)
+2. `npm audit signatures` (registry signatures and provenance)
+3. `osv-scanner` against `package-lock.json`, if it is installed locally
+   ([install](https://google.github.io/osv-scanner/installation/)); set
+   `OSV_REQUIRED=1` to make it mandatory
+
+The Husky **pre-push** hook runs `npm run security` and then `npm run verify`,
+so a push with a known CVE in the lockfile, a type error or a failing test is
+refused. Bypass in an emergency with `git push --no-verify`.
+
+## CI/CD
+
+`.github/workflows/site.yml`:
+
+| Trigger | CVE scan | Check, build, test | Deploy |
+| --- | :---: | :---: | :---: |
+| Pull request | ✓ | ✓ | |
+| Push to `main` / manual run on `main` | ✓ | ✓ | ✓ |
+| Weekly (Mon 03:17 UTC) | ✓ | ✓ | |
+
+The deploy job needs both the CVE scan and the build to pass. All actions are
+pinned to full commit SHAs, and jobs get only the permissions they need.
+Dependabot (`.github/dependabot.yml`) proposes grouped weekly updates for npm
+and GitHub Actions after a 7-day cooldown; security updates are not delayed.
+
+## Changelog
+
+Changes are recorded with [Changie](https://changie.dev):
+
 ```bash
-# Structured blog post
-hugo new content/blog/posts/your-post-title.md
-# Creates a note
-hugo new content/notes/posts/your-note-title.md
-# Add a project
-hugo new content/projects/your-project-name.md
-# Add a publication
-hugo new content/publications/your-publication-title.md
+changie new        # add a fragment under .changes/unreleased/
+changie batch auto && changie merge
 ```
-
-## Code Block Rendering
-
-Control how code blocks are displayed vs rendered using attributes:
-
-### Mermaid Diagrams
-- ` ```mermaid ` - Default: render the diagram
-- ` ```mermaid {.raw} ` - Show raw mermaid code (syntax highlighted)
-
-### Typst Documents
-- ` ```typst ` - Default: show raw typst code (syntax highlighted)
-- ` ```typst {.render} ` - Compile and show output
-- ` ```typst {.side-by-side} ` - Show code and output side by side
-
-#### Rendering Typst Outputs
-
-**IMPORTANT: Typst rendering MUST be done locally before pushing to GitHub.**
-
-GitHub Actions does NOT render Typst files. You must generate and commit the PNG outputs locally.
-
-To generate PNG/PDF files for Typst code blocks marked with `{.render}` or `{.side-by-side}`:
-
-```bash
-bash scripts/render-typst.sh
-```
-
-This script will:
-- Scan all markdown files for Typst code blocks that need rendering
-- Compile them using the Typst CLI to PNG or PDF files (PDF for multi-page documents)
-- Save outputs to `static/rendered/typst/{page-slug}/typst-{hash}.png` or `.pdf`
-- Cache previously rendered files (won't re-render if unchanged)
-
-**Image inputs:** Images referenced from Typst code with bare relative paths
-(e.g. `image("tree.jpg")`) live in `assets/typst/`. The render script copies them
-into its temp compile dir by basename so those paths resolve. Put any new Typst
-image inputs there. (`references.bib` is still read from the project root.)
-
-## Content Publishing Workflow
-
-### For posts with Typst rendering:
-
-1. **Create or edit your markdown file:**
-   ```bash
-   hugo new content/notes/posts/my-new-post.md
-   # Edit the file, add Typst code blocks with {.render} or {.side-by-side}
-   ```
-
-2. **Generate Typst PNG/PDF outputs:**
-   ```bash
-   bash scripts/render-typst.sh
-   ```
-
-3. **Test locally:**
-   ```bash
-   hugo server -D
-   # Visit http://localhost:1313 and verify your content renders correctly
-   ```
-
-4. **Commit and push:**
-   ```bash
-   git add content/notes/posts/my-new-post.md
-   git add static/rendered/typst/my-new-post/
-   git commit -m "Add new post with Typst rendering"
-   git push
-   ```
-
-### For posts without Typst rendering:
-
-1. Create/edit markdown file
-2. Test locally with `hugo server -D`
-3. Commit and push
-
-### Important Notes:
-- **REQUIRED: Render Typst locally before pushing** - GitHub Actions does NOT have Typst installed
-- **Always commit the generated PNG/PDF files** - They must be in the repository for GitHub Pages to serve them
-- The render script uses caching - only re-renders changed content
-- Raw Typst code blocks (` ```typst `) don't need the script, they just show syntax-highlighted code
-- Mermaid diagrams work without scripts (rendered client-side)

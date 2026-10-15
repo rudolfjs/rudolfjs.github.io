@@ -1,0 +1,3 @@
+# CVE checks first: they are fast and the reason this hook exists.
+npm run security
+npm run verify
