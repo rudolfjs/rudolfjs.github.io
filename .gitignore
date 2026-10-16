@@ -1,7 +1,9 @@
-# Hugo build outputs
-/public/
-/resources/
-.hugo_build.lock
+# Astro
+/dist/
+/.astro/
+
+# Node
+node_modules/
 
 # Editor directories and files
 .vscode/
@@ -10,6 +12,7 @@
 *.sublime-workspace
 *.sublime-project
 *.code-workspace
+.DS_Store
 
 # Temporary files
 *.tmp
@@ -21,30 +24,3 @@ GEMINI.md
 AGENTS.md
 .claude
 .copilot
-
-# Playwright
-node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
-.playwright-mcp/
-
-# Typst / LaTeX
-*.aux
-*.log
-*.out
-*.toc
-*.synctex.gz
-*.fdb_latexmk
-*.fls
-*.xdv
-
-# Notes
-*.txt# pixi environments
-.pixi/*
-!.pixi/config.toml
-.typst-temp-*
-
-.air
