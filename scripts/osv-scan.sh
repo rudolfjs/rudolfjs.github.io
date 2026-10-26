@@ -8,6 +8,7 @@
 set -eu
 
 # Keep in step with google/osv-scanner-action in .github/workflows/site.yml
+# and .github/workflows/osv-scanner.yml
 OSV_IMAGE="ghcr.io/google/osv-scanner-action:v2.7.0"
 
 if command -v osv-scanner >/dev/null 2>&1; then
