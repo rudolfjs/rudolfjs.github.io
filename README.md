@@ -27,6 +27,7 @@ git checkout v3.5.0 -- content/   # e.g. to bring the Markdown content back
 | `tests/site.test.ts` | Contract tests for `dist/` and the workflows (`node:test`) |
 | `.husky/pre-push` | Local CVE checks + verify before every push |
 | `.github/workflows/site.yml` | CI/CD: CVE scan, build, test, deploy to Pages |
+| `.github/workflows/osv-scanner.yml` | OSV-Scanner: code scanning alerts and PR checks |
 
 ## Development
 
@@ -65,10 +66,22 @@ refused. Bypass in an emergency with `git push --no-verify`.
 | Push to `main` / manual run on `main` | ✓ | ✓ | ✓ |
 | Weekly (Mon 03:17 UTC) | ✓ | ✓ | |
 
-The deploy job needs both the CVE scan and the build to pass. All actions are
-pinned to full commit SHAs, and jobs get only the permissions they need.
-Dependabot (`.github/dependabot.yml`) proposes grouped weekly updates for npm
-and GitHub Actions after a 7-day cooldown; security updates are not delayed.
+The deploy job needs both the CVE scan and the build to pass.
+
+`.github/workflows/osv-scanner.yml` runs Google's
+[OSV-Scanner](https://google.github.io/osv-scanner/) reusable workflows
+against [osv.dev](https://osv.dev) and uploads the results to
+**Security > Code scanning**:
+
+| Trigger | Scan | Fails on |
+| --- | --- | --- |
+| Pull request to `main` | PR and base branch, compared | Vulnerabilities the PR introduces |
+| Push to `main`, daily (04:41 UTC), manual run | Full | Any known vulnerability |
+
+All actions and reusable workflows are pinned to full commit SHAs, and jobs
+get only the permissions they need. Dependabot (`.github/dependabot.yml`)
+proposes grouped weekly updates for npm and GitHub Actions after a 7-day
+cooldown; security updates are not delayed.
 
 ## Changelog
 
