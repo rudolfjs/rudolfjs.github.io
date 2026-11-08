@@ -29,9 +29,9 @@
   },
   "homepage": "https://rudolfjs.id.au",
   "devDependencies": {
-    "@astrojs/check": "0.9.10",
+    "@astrojs/check": "0.9.12",
     "@types/node": "26.6.4",
-    "astro": "7.3.8",
+    "astro": "7.4.2",
     "husky": "9.1.7",
     "typescript": "7.0.2"
   }
