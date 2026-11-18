@@ -1,0 +1,3 @@
+kind: Fixed
+body: '`npm ci` works again, unblocking the CVE scan, build and deploy — TypeScript is back on 6.0.3, the newest major `@astrojs/check` supports, and Dependabot no longer proposes TypeScript 7'
+time: 2026-11-18T07:24:46.747918379Z

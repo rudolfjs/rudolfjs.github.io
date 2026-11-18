@@ -1,0 +1,3 @@
+kind: Security
+body: '`picomatch` ReDoS advisory GHSA-fc5q-39xc-vjpf has no fixed release yet and is accepted until 2026-12-18 in `osv-scanner.toml` — OSV-Scanner and the `npm audit` gate read the same time-boxed list, and fail again once an entry expires'
+time: 2026-11-18T07:24:45.743543811Z
