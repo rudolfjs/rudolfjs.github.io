@@ -4,7 +4,8 @@
 // fixed release would block every push and deploy. This runs
 // `npm audit --json` and fails on every advisory except the ones listed under
 // [[IgnoredVulns]] in osv-scanner.toml that have not reached their ignoreUntil
-// date. Anything it cannot read or understand is a failure, never a pass.
+// date. Anything it cannot read or understand is a failure, never a pass, and
+// so is an npm that does not exit the way a finished audit does.
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -28,6 +29,21 @@ export interface Advisory {
 export interface Verdict {
   accepted: { advisory: Advisory; exception: Exception }[];
   blocking: { advisory: Advisory; why: string }[];
+}
+
+/** What `spawnSync` needs to start a process. */
+export interface Launch {
+  command: string;
+  args: string[];
+  shell: boolean;
+}
+
+/** How a process ended and what it printed (the part of `spawnSync`'s result the gate reads). */
+export interface AuditRun {
+  status: number | null;
+  signal: string | null;
+  stdout: string;
+  stderr: string;
 }
 
 const CONFIG = resolve(import.meta.dirname, '..', 'osv-scanner.toml');
@@ -111,23 +127,59 @@ export function evaluate(advisories: Advisory[], exceptions: Exception[], today:
   return verdict;
 }
 
-function main(): number {
-  // npm exits 1 when it finds vulnerabilities; the report is still on stdout.
-  const audit = spawnSync('npm', ['audit', '--json'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
-  if (audit.error) throw audit.error;
+/**
+ * How to start `npm audit --json`. The `npm` on PATH is a script (npm.cmd on
+ * Windows), which only a shell can start. `npm run` exports the path of the
+ * npm CLI that is running this script, so that file is run with this Node
+ * instead: no shell on any platform, and the same npm as the caller.
+ */
+export function auditLaunch(env: NodeJS.ProcessEnv, platform: NodeJS.Platform): Launch {
+  const cli = env['npm_execpath'];
+  // Other package managers put their own CLI in npm_execpath, hence the name check.
+  if (cli !== undefined && /(^|[\\/])npm-cli\.js$/.test(cli)) {
+    return { command: process.execPath, args: [cli, 'audit', '--json'], shell: false };
+  }
+  // Run directly (`node scripts/npm-audit.ts`): npm comes from PATH.
+  if (platform === 'win32') return { command: 'npm audit --json', args: [], shell: true };
+  return { command: 'npm', args: ['audit', '--json'], shell: false };
+}
+
+/**
+ * Returns the advisories a finished `npm audit --json` reported, or throws if
+ * npm did not finish the way an audit does: exit 0 with nothing found, or exit
+ * 1 with the advisories (or its own error) in the report. A report from an npm
+ * that ended any other way is not a verdict, however clean it looks.
+ */
+export function readAdvisories({ status, signal, stdout, stderr }: AuditRun): Advisory[] {
+  if (signal !== null) throw new Error(`npm audit was killed by ${signal}`);
+  if (status !== 0 && status !== 1) {
+    throw new Error(`npm audit exited with status ${status}, not 0 or 1:\n${stderr || stdout}`);
+  }
   let report: unknown;
   try {
-    report = JSON.parse(audit.stdout);
+    report = JSON.parse(stdout);
   } catch {
-    throw new Error(`npm audit did not return JSON (exit ${audit.status}):\n${audit.stderr || audit.stdout}`);
+    throw new Error(`npm audit did not return JSON (exit ${status}):\n${stderr || stdout}`);
   }
   if (typeof report === 'object' && report !== null && 'error' in report) {
     throw new Error(`npm audit failed: ${JSON.stringify(report.error)}`);
   }
+  const advisories = parseAdvisories(report);
+  // The exit 1 has to be explained by the report before exceptions can overrule it.
+  if (status === 1 && advisories.length === 0) {
+    throw new Error(`npm audit exited with status 1 but its report lists no advisory:\n${stderr || stdout}`);
+  }
+  return advisories;
+}
+
+function main(): number {
+  const { command, args, shell } = auditLaunch(process.env, process.platform);
+  const audit = spawnSync(command, args, { shell, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  if (audit.error) throw audit.error;
 
   const exceptions = existsSync(CONFIG) ? parseExceptions(readFileSync(CONFIG, 'utf8')) : [];
   const today = new Date().toISOString().slice(0, 10);
-  const { accepted, blocking } = evaluate(parseAdvisories(report), exceptions, today);
+  const { accepted, blocking } = evaluate(readAdvisories(audit), exceptions, today);
 
   const describe = (a: Advisory): string => `${a.id} (${a.severity}) ${a.packages.join(', ')}: ${a.title}\n    ${a.url}`;
   for (const { advisory, exception } of accepted) {
