@@ -25,6 +25,8 @@ git checkout v3.5.0 -- content/   # e.g. to bring the Markdown content back
 | `src/pages/index.astro`, `src/pages/404.astro` | Routes; both render the holding page |
 | `public/` | Static files copied as-is (favicon) |
 | `tests/site.test.ts` | Contract tests for `dist/` and the workflows (`node:test`) |
+| `tests/npm-audit.test.ts` | Contract tests for the `npm audit` gate and accepted advisories |
+| `osv-scanner.toml` | Advisories accepted for a limited time, with reasons |
 | `.husky/pre-push` | Local CVE checks + verify before every push |
 | `.github/workflows/site.yml` | CI/CD: CVE scan, build, test, deploy to Pages |
 | `.github/workflows/osv-scanner.yml` | OSV-Scanner: code scanning alerts and PR checks |
@@ -45,16 +47,28 @@ npm run preview    # serve dist/
 
 `npm run security` runs:
 
-1. `npm audit --audit-level=low` (GitHub Advisory Database, the same data
-   Dependabot uses)
+1. `npm audit` through `scripts/npm-audit.ts` (GitHub Advisory Database, the
+   same data Dependabot uses); any advisory of any severity fails it
 2. `npm audit signatures` (registry signatures and provenance)
 3. `osv-scanner` against `package-lock.json`, if it is installed locally
-   ([install](https://google.github.io/osv-scanner/installation/)); set
-   `OSV_REQUIRED=1` to make it mandatory
+   ([install](https://google.github.io/osv-scanner/installation/)) or podman
+   or docker can run its container image; set `OSV_REQUIRED=1` to make it
+   mandatory
 
 The Husky **pre-push** hook runs `npm run security` and then `npm run verify`,
 so a push with a known CVE in the lockfile, a type error or a failing test is
 refused. Bypass in an emergency with `git push --no-verify`.
+
+### Accepted advisories
+
+An advisory with no fixed release cannot be upgraded away, and would otherwise
+block every push and deploy. Such an advisory is accepted for a limited time in
+[`osv-scanner.toml`](osv-scanner.toml), as an `[[IgnoredVulns]]` entry with an
+`id`, an `ignoreUntil` date and a `reason`. OSV-Scanner (locally and in both
+workflows) and `scripts/npm-audit.ts` read the same file, so there is one list.
+An entry stops applying on its `ignoreUntil` date (UTC) and the checks fail
+again; upgrade then, or renew the date deliberately. Remove the entry as soon
+as a fixed release is in the lockfile.
 
 ## CI/CD
 

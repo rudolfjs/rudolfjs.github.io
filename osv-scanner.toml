@@ -1,0 +1,13 @@
+# Advisories accepted for now, each with an expiry and a reason.
+#
+# Read by OSV-Scanner (it applies the osv-scanner.toml next to the lockfile it
+# scans) and by scripts/npm-audit.ts, so `npm audit`, the pre-push hook and
+# both workflows honour the same list. An entry stops applying on its
+# ignoreUntil date (UTC) and the scans fail again: upgrade then, or renew it
+# deliberately. tests/npm-audit.test.ts requires every entry to carry
+# ignoreUntil and reason.
+
+[[IgnoredVulns]]
+id = "GHSA-fc5q-39xc-vjpf" # CVE-2026-112366, picomatch <= 4.0.7 (ReDoS)
+ignoreUntil = 2026-12-18
+reason = "No fixed picomatch release exists yet (fix PRs are open upstream). The ReDoS needs an attacker-supplied glob pattern; here picomatch is a build-time dev dependency of Astro/Vite that only sees globs from this repo, and the deployed site is static HTML."

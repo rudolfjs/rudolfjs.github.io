@@ -17,9 +17,13 @@ fi
 
 for engine in podman docker; do
   if command -v "$engine" >/dev/null 2>&1; then
-    exec "$engine" run --rm \
-      -v "$PWD/package-lock.json:/src/package-lock.json:ro,Z" \
-      "$OSV_IMAGE" --lockfile=/src/package-lock.json
+    # osv-scanner reads osv-scanner.toml (accepted advisories) from the
+    # lockfile's directory, so it has to be mounted next to the lockfile.
+    set -- -v "$PWD/package-lock.json:/src/package-lock.json:ro,Z"
+    if [ -f osv-scanner.toml ]; then
+      set -- "$@" -v "$PWD/osv-scanner.toml:/src/osv-scanner.toml:ro,Z"
+    fi
+    exec "$engine" run --rm "$@" "$OSV_IMAGE" --lockfile=/src/package-lock.json
   fi
 done
 
